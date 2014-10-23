@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Shapes">
       <UniqueIdentifier>{54c54bda-79d6-4e10-8d48-eff167923bec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Reader">
+      <UniqueIdentifier>{e4fa85b6-f3c1-44ae-927c-639a1acf0306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Reader">
+      <UniqueIdentifier>{d806a8e3-c650-4db9-b0b6-7941de99915b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="Square.cpp">
       <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesReader.cpp">
+      <Filter>Source Files\Reader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,5 +62,13 @@
     <ClInclude Include="IShape.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="ShapesReader.h">
+      <Filter>Header Files\Reader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="InputShapes.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
