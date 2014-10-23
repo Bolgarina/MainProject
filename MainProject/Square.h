@@ -2,6 +2,7 @@
 
 #include "IShape.h"
 #include "Point.h"
+#include "Renderer.h"
 
 #include <iostream>
 
@@ -14,6 +15,7 @@ public:
 	~Square();
 
 	friend std::istream &operator>>(std::istream &stream, Square &i_square);
+	void accept(Renderer *i_renderer);
 
 private:
 	Point origin;

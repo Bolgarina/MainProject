@@ -22,3 +22,8 @@ std::istream &operator>>(std::istream &stream, Square &i_square)
 	stream >> i_square.origin.x >> i_square.origin.y >> i_square.side;
 	return stream;
 }
+
+void Square::accept(Renderer *i_renderer)
+{
+	i_renderer->visit(this);
+}

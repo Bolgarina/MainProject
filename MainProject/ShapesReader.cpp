@@ -31,9 +31,7 @@ const bool ShapesReader::read()
 				Square square;
 				reader >> square;
 
-				// if shapes.push_back(std::make_shared<IShape>(new Square(square)));
-				// error: 'IShape::IShape(const IShape &)': cannot convert argument 1 from 'Square *' to 'const IShape &'
-				shapes.push_back(std::make_shared<IShape>(square));
+				shapes.push_back(std::make_shared<Square>(square));
 				// square goes out of scope. Will it be deleted or not (while shared_ptr refers to it)?
 			}
 			else if (type.compare("rectangle") == 0)
@@ -41,7 +39,7 @@ const bool ShapesReader::read()
 				Rectangle rect;
 				reader >> rect;
 
-				shapes.push_back(std::make_shared<IShape>(rect));
+				shapes.push_back(std::make_shared<Rectangle>(rect));
 			}
 			else
 			{

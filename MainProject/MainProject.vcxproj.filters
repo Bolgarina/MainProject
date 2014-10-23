@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Reader">
       <UniqueIdentifier>{d806a8e3-c650-4db9-b0b6-7941de99915b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{bbf0fb20-22bb-4ac5-bc71-f9b202ae0554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{be5b2a36-0465-4839-8748-283cc9b698c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,6 +54,9 @@
     <ClCompile Include="ShapesReader.cpp">
       <Filter>Source Files\Reader</Filter>
     </ClCompile>
+    <ClCompile Include="Drawer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Point.h">
@@ -64,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="ShapesReader.h">
       <Filter>Header Files\Reader</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawer.h">
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

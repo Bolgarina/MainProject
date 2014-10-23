@@ -2,6 +2,7 @@
 
 #include "IShape.h"
 #include "Point.h"
+#include "Renderer.h"
 
 #include <iostream>
 
@@ -14,6 +15,7 @@ public:
 	~Rectangle();
 
 	friend std::istream &operator>>(std::istream &stream, Rectangle &i_rect);
+	void accept(Renderer* i_renderer);
 
 private:
 	Point origin;
