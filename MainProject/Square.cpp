@@ -21,12 +21,12 @@ std::string Square::name()
 	return "square";
 }
 
-std::istream &operator>>(std::istream &stream, Square &i_square)
-{
-	// don't forget to check the input
-	stream >> i_square.origin.x >> i_square.origin.y >> i_square.side;
-	return stream;
-}
+//std::istream &operator>>(std::istream &stream, Square &i_square)
+//{
+//	// don't forget to check the input
+//	stream >> i_square.origin.x >> i_square.origin.y >> i_square.side;
+//	return stream;
+//}
 
 void Square::accept(Renderer *i_renderer)
 {

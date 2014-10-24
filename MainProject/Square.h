@@ -16,7 +16,7 @@ public:
 	~Square();
 
 	static std::string name();
-	friend std::istream &operator>>(std::istream &stream, Square &i_square);
+	/*friend std::istream &operator>>(std::istream &stream, Square &i_square);*/
 	void accept(Renderer *i_renderer);
 
 private:

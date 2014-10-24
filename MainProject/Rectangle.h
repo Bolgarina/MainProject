@@ -16,7 +16,7 @@ public:
 	~Rectangle();
 
 	static std::string name();
-	friend std::istream &operator>>(std::istream &stream, Rectangle &i_rect);
+	/*friend std::istream &operator>>(std::istream &stream, Rectangle &i_rect);*/
 	void accept(Renderer* i_renderer);
 
 private:

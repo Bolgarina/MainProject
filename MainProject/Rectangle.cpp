@@ -21,12 +21,12 @@ std::string Rectangle::name()
 	return "rectangle";
 }
 
-std::istream &operator>>(std::istream &stream, Rectangle &i_rect)
-{
-	// don't forget to check the input
-	stream >> i_rect.origin.x >> i_rect.origin.y >> i_rect.width >> i_rect.height;
-	return stream;
-}
+//std::istream &operator>>(std::istream &stream, Rectangle &i_rect)
+//{
+//	// don't forget to check the input
+//	stream >> i_rect.origin.x >> i_rect.origin.y >> i_rect.width >> i_rect.height;
+//	return stream;
+//}
 
 void Rectangle::accept(Renderer *i_renderer)
 {
