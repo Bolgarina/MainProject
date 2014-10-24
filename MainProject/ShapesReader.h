@@ -13,7 +13,7 @@ public:
 	ShapesReader(const std::string i_name);
 	~ShapesReader();
 
-	const bool read();
+	bool read();
 	const ShList &getShapes() const;
 
 private:

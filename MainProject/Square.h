@@ -5,6 +5,7 @@
 #include "Renderer.h"
 
 #include <iostream>
+#include <string>
 
 class Square : public IShape
 {
@@ -14,6 +15,7 @@ public:
 	explicit Square(const Square &i_square);
 	~Square();
 
+	static std::string name();
 	friend std::istream &operator>>(std::istream &stream, Square &i_square);
 	void accept(Renderer *i_renderer);
 

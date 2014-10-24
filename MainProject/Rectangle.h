@@ -5,6 +5,7 @@
 #include "Renderer.h"
 
 #include <iostream>
+#include <string>
 
 class Rectangle : public IShape
 {
@@ -14,6 +15,7 @@ public:
 	explicit Rectangle(const Rectangle &i_rect);
 	~Rectangle();
 
+	static std::string name();
 	friend std::istream &operator>>(std::istream &stream, Rectangle &i_rect);
 	void accept(Renderer* i_renderer);
 

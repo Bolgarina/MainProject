@@ -16,6 +16,11 @@ Square::~Square()
 {
 }
 
+std::string Square::name()
+{
+	return "square";
+}
+
 std::istream &operator>>(std::istream &stream, Square &i_square)
 {
 	// don't forget to check the input

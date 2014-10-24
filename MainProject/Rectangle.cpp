@@ -16,6 +16,11 @@ Rectangle::~Rectangle()
 {
 }
 
+std::string Rectangle::name()
+{
+	return "rectangle";
+}
+
 std::istream &operator>>(std::istream &stream, Rectangle &i_rect)
 {
 	// don't forget to check the input

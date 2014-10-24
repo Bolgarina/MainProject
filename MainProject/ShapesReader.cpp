@@ -14,7 +14,7 @@ ShapesReader::~ShapesReader()
 {
 }
 
-const bool ShapesReader::read()
+bool ShapesReader::read()
 {
 	std::ifstream reader(name);
 
@@ -25,8 +25,7 @@ const bool ShapesReader::read()
 			std::string type;
 			reader >> type;
 
-			// don't forget to make "square" and "rectangle" const
-			if (type.compare("square") == 0)
+			if (type.compare(Square::name()) == 0)
 			{
 				Square square;
 				reader >> square;
@@ -34,7 +33,7 @@ const bool ShapesReader::read()
 				shapes.push_back(std::make_shared<Square>(square));
 				// square goes out of scope. Will it be deleted or not (while shared_ptr refers to it)?
 			}
-			else if (type.compare("rectangle") == 0)
+			else if (type.compare(Rectangle::name()) == 0)
 			{
 				Rectangle rect;
 				reader >> rect;
