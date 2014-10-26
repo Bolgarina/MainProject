@@ -14,20 +14,26 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="LibSettings">
-      <UniqueIdentifier>{2b7df455-c06b-4bbd-9a7d-61339dcdbca9}</UniqueIdentifier>
+      <UniqueIdentifier>{a4917633-ba19-44b7-9482-84d037412e4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClInclude Include="DllApi.h">
+      <Filter>LibSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="_Link.h">
+      <Filter>LibSettings</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ShapesReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Linking.cpp">
       <Filter>LibSettings</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="InputShapes.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>

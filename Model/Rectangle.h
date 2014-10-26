@@ -1,13 +1,16 @@
 #pragma once
 
-#include "IShape.h"
-#include "Point.h"
-#include "Renderer.h"
+#include "./DllApi.h"
+
+#include "./IShape.h"
+#include "./Point.h"
 
 #include <iostream>
 #include <string>
 
-class Rectangle : public IShape
+class ITransformation;
+
+class MODEL_API Rectangle : public IShape
 {
 public:
 	Rectangle();
@@ -17,10 +20,15 @@ public:
 
 	static std::string name();
 	/*friend std::istream &operator>>(std::istream &stream, Rectangle &i_rect);*/
-	void accept(Renderer* i_renderer);
+	void accept(ITransformation* i_transform);
+
+	// For tests
+	const Point &getOrigin() const;
+	const size_t &getWidth() const;
+	const size_t &getHeight() const;
 
 private:
 	Point origin;
-	int width;
-	int height;
+	size_t width;
+	size_t height;
 };

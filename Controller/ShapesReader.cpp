@@ -1,6 +1,6 @@
-#include "ShapesReader.h"
-#include "Square.h"
-#include "Rectangle.h"
+#include "./ShapesReader.h"
+#include <Model/Triangle.h>
+#include <Model/Rectangle.h>
 
 #include <fstream>
 #include <memory>
@@ -39,11 +39,12 @@ bool ShapesReader::read()
 
 			try
 			{
-				if (v_data.at(0).compare(Square::name()) == 0)
+				if (v_data.at(0).compare(Triangle::name()) == 0)
 				{
 					// Square::Square(Point i_point, int i_side)
-					std::shared_ptr<IShape> ptr(new Square(Point(std::stoi(v_data.at(1)), std::stoi(v_data.at(2))),
-														   std::stoi(v_data.at(3))));
+					std::shared_ptr<IShape> ptr(new Triangle(Point(std::stoi(v_data.at(1)), std::stoi(v_data.at(2))),
+						Point(std::stoi(v_data.at(3)), std::stoi(v_data.at(4))),
+						Point(std::stoi(v_data.at(5)), std::stoi(v_data.at(6)))));
 					shapes.push_back(ptr);
 				}
 				else if (v_data.at(0).compare(Rectangle::name()) == 0)

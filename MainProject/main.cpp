@@ -1,5 +1,5 @@
-#include "ShapesReader.h"
-#include "Drawer.h"
+#include <Controller/ShapesReader.h>
+#include <Model/Transformation.h>
 
 int main()
 {
@@ -9,9 +9,9 @@ int main()
 	if (reader.read())
 		shapes = reader.getShapes();
 
-	Drawer drawer;
+	Transformation transf;
 	for (auto it = shapes.begin(); it != shapes.end(); it++)
-		(*it)->accept(&drawer);
+		(*it)->accept(&transf);
 
 	return 0;
 }

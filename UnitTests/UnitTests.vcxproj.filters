@@ -14,20 +14,27 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="LibSettings">
-      <UniqueIdentifier>{2b7df455-c06b-4bbd-9a7d-61339dcdbca9}</UniqueIdentifier>
+      <UniqueIdentifier>{44b5a9c6-7f18-4485-a71f-c3315bbae166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ModelTests">
+      <UniqueIdentifier>{ab87dbf4-b90c-4183-a4d5-1e9610bdd2e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Linking.cpp">
       <Filter>LibSettings</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="InputShapes.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <ClCompile Include="PointTests.cpp">
+      <Filter>Source Files\ModelTests</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleTests.cpp">
+      <Filter>Source Files\ModelTests</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleTests.cpp">
+      <Filter>Source Files\ModelTests</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformationTests.cpp">
+      <Filter>Source Files\ModelTests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
