@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MainProject", "MainProject\MainProject.vcxproj", "{B776E3EE-301F-4972-83A3-D80923471859}"
@@ -22,7 +22,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Controller", "Controller\Co
 		{EAD129C7-2161-493E-AB49-70A82E4CEBBB} = {EAD129C7-2161-493E-AB49-70A82E4CEBBB}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freeglut", "FreeGlut\freeglut.vcxproj", "{1AE4E979-0D35-4747-BF8E-DD60358F49DB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FreeGlut", "FreeGlut\freeglut.vcxproj", "{1AE4E979-0D35-4747-BF8E-DD60358F49DB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FreeGlew", "FreeGlew\FreeGlew.vcxproj", "{3B1557C0-660D-4494-BC65-0657D50E3396}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +102,18 @@ Global
 		{1AE4E979-0D35-4747-BF8E-DD60358F49DB}.Release|Win32.Build.0 = Release|Win32
 		{1AE4E979-0D35-4747-BF8E-DD60358F49DB}.Release|x64.ActiveCfg = Release|x64
 		{1AE4E979-0D35-4747-BF8E-DD60358F49DB}.Release|x64.Build.0 = Release|x64
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Debug_Static|Win32.ActiveCfg = Debug|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Debug_Static|Win32.Build.0 = Debug|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Debug_Static|x64.ActiveCfg = Debug|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Debug|Win32.Build.0 = Debug|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Debug|x64.ActiveCfg = Debug|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Release_Static|Win32.ActiveCfg = Release|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Release_Static|Win32.Build.0 = Release|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Release_Static|x64.ActiveCfg = Release|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Release|Win32.ActiveCfg = Release|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Release|Win32.Build.0 = Release|Win32
+		{3B1557C0-660D-4494-BC65-0657D50E3396}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
