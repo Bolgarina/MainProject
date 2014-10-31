@@ -16,6 +16,9 @@
     <Filter Include="LibSettings">
       <UniqueIdentifier>{a4917633-ba19-44b7-9482-84d037412e4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Interfaces">
+      <UniqueIdentifier>{d16bd94c-294b-4487-9007-dff030d58733}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DllApi.h">
@@ -27,6 +30,12 @@
     <ClInclude Include="_Link.h">
       <Filter>LibSettings</Filter>
     </ClInclude>
+    <ClInclude Include="IController.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShapesReader.cpp">
@@ -34,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="Linking.cpp">
       <Filter>LibSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLController.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -81,11 +81,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DllApi.h" />
+    <ClInclude Include="IController.h" />
+    <ClInclude Include="OpenGLController.h" />
     <ClInclude Include="ShapesReader.h" />
     <ClInclude Include="_Link.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Linking.cpp" />
+    <ClCompile Include="OpenGLController.cpp" />
     <ClCompile Include="ShapesReader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
