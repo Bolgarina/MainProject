@@ -1,5 +1,5 @@
 #include "./Rectangle.h"
-#include "./ITransformation.h"
+#include "./IView.h"
 
 namespace Geometry
 {
@@ -26,12 +26,12 @@ namespace Geometry
 		return "rectangle";
 	}
 
-	void Rectangle::accept(ITransformation *i_transform)
+	void Rectangle::accept(IView *i_view)
 	{
-		if (!i_transform)
+		if (!i_view)
 			throw std::runtime_error("Exceptional case.");
 
-		i_transform->visit(this);
+		i_view->visit(this);
 	}
 
 	const Point &Rectangle::getOrigin() const

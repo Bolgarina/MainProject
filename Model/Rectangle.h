@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 
-class ITransformation;
+class IView;
 
 namespace Geometry
 {
@@ -21,7 +21,7 @@ namespace Geometry
 		~Rectangle();
 
 		static std::string name();
-		void accept(ITransformation* i_transform);
+		void accept(IView* i_view);
 
 		// For tests
 		const Point &getOrigin() const;

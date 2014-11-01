@@ -79,7 +79,7 @@
     <ClInclude Include="Display.h" />
     <ClInclude Include="DllApi.h" />
     <ClInclude Include="IShape.h" />
-    <ClInclude Include="ITransformation.h" />
+    <ClInclude Include="IView.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Triangle.h" />

@@ -133,8 +133,8 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 	printLog("'" + str + "' has been pressed ( x = " + std::to_string(x) + ", y = " + std::to_string(y) + ")");
 }
 
-void OpenGLController::keySpecial(int key, int x, int y) {
-
+void OpenGLController::keySpecial(int key, int x, int y)
+{
 	switch (key)
 	{
 	case GLUT_KEY_LEFT:

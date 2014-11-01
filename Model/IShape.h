@@ -2,12 +2,12 @@
 
 #include "./DllApi.h"
 
-class ITransformation;
+class IView;
 
 class MODEL_API IShape
 {
 public:
 	virtual ~IShape() {};
 	
-	virtual void accept(ITransformation*) = 0;
+	virtual void accept(IView*) = 0;
 };

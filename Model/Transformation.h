@@ -2,7 +2,7 @@
 
 #include "./DllApi.h"
 
-#include "./ITransformation.h"
+#include "./IView.h"
 
 namespace Geometry
 {
@@ -10,7 +10,7 @@ namespace Geometry
 	class Rectangle;
 }
 
-class MODEL_API Transformation : public ITransformation
+class MODEL_API Transformation : public IView
 {
 public:
 	void visit(Geometry::Triangle* i_triangle);

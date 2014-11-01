@@ -1,5 +1,5 @@
 #include "./Triangle.h"
-#include "./ITransformation.h"
+#include "./IView.h"
 
 namespace Geometry
 {
@@ -36,12 +36,12 @@ namespace Geometry
 		return "triangle";
 	}
 
-	void Triangle::accept(ITransformation *i_transform)
+	void Triangle::accept(IView *i_view)
 	{
-		if (!i_transform)
+		if (!i_view)
 			throw std::runtime_error("Exceptional case.");
 
-		i_transform->visit(this);
+		i_view->visit(this);
 	}
 
 	const Point *const Triangle::getVertices() const
