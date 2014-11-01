@@ -12,14 +12,19 @@ class CONTROLLER_API OpenGLController: public IController
 public:
 	OpenGLController(ShapesReader::ShList *i_shapes);
 
-	void init(int &i_argc, char **i_argv) const;
+	void init(int &i_argc, char **i_argv);
+
+	void display();
+	void reshape(int width, int height);
+
+	// Interaction
+	void mouse(int button, int state, int x, int y);
+	void motion(int x, int y);
+	void keyboard(unsigned char key, int x, int y);
+	void keySpecial(int key, int x, int y);
+
+	void printLog(const std::string &log);
 
 private:
 	ShapesReader::ShList *shapes;
-
-	static void printLog(const std::string &log);
-	static void mouse(int button, int state, int x, int y);
-	static void motion(int x, int y);
-	static void keyboard(unsigned char key, int x, int y);
-	static void keySpecial(int key, int x, int y);
 };

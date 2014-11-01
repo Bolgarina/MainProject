@@ -3,6 +3,7 @@
 #include <Model/Point.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace Geometry;
 
 namespace UnitTests
 {

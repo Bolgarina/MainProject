@@ -1,16 +1,56 @@
+#include "./OpenGLController.h"
+
+#include <Model/Display.h>
+
 #include <FreeGlew/glew.h>
 #include <FreeGlut/glut.h>
 
-#include "./OpenGLController.h"
-
 #include <iostream>
+
+namespace
+{
+	// http://stackoverflow.com/questions/3589422/using-opengl-glutdisplayfunc-within-class
+	OpenGLController* g_controller; // g_ - global
+
+    void displayCallback()
+	{
+		g_controller->display();
+	}
+
+	void reshapeCallback(int width, int height)
+	{
+		g_controller->reshape(width, height);
+	}
+
+	void mouseCallback(int button, int state, int x, int y)
+	{
+		g_controller->mouse(button, state, x, y);
+	}
+
+	void motionCallback(int x, int y)
+	{
+		g_controller->motion(x, y);
+	}
+
+	void keyboardCallback(unsigned char key, int x, int y)
+	{
+		g_controller->keyboard(key, x, y);
+	}
+
+	void keySpecialCallback(int key, int x, int y)
+	{
+		g_controller->keySpecial(key, x, y);
+	}
+}
 
 OpenGLController::OpenGLController(ShapesReader::ShList *i_shapes) : shapes(i_shapes)
 {
 }
 
-void OpenGLController::init(int &i_argc, char **i_argv) const
+void OpenGLController::init(int &i_argc, char **i_argv)
 {
+	g_controller = this;
+
 	glutInit(&i_argc, i_argv);
 	
 	GLsizei width, height;
@@ -18,18 +58,42 @@ void OpenGLController::init(int &i_argc, char **i_argv) const
 	height = glutGet(GLUT_SCREEN_HEIGHT);
 	glutInitWindowSize((width / 2) - 4, height / 2);
 	glutInitWindowPosition(width / 4, height / 4);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 	glutCreateWindow("3D scene");
 
 	glewInit();
 
 	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glutMouseFunc(mouse);
-	glutMotionFunc(motion);
-	glutKeyboardFunc(keyboard);
-	glutSpecialFunc(keySpecial);
+
+	glutDisplayFunc(displayCallback);
+	//glutIdleFunc(display);
+	glutReshapeFunc(reshapeCallback);
+
+	glutMouseFunc(mouseCallback);
+	glutMotionFunc(motionCallback);
+	glutKeyboardFunc(keyboardCallback);
+	glutSpecialFunc(keySpecialCallback);
 
 	glutMainLoop();
+}
+
+void OpenGLController::display()
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	Display display;
+	for (auto it = shapes->begin(); it != shapes->end(); it++)
+		(*it)->accept(&display);
+
+	glutSwapBuffers();
+}
+
+void OpenGLController::reshape(int width, int height)
+{
+	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.0, 12.0, 0.0, 12.0, -1.0, 1.0);
 }
 
 void OpenGLController::mouse(int button, int state, int x, int y)

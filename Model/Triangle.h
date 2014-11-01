@@ -10,20 +10,23 @@
 
 class ITransformation;
 
-class MODEL_API Triangle : public IShape
+namespace Geometry
 {
-public:
-	Triangle();
-	Triangle(Point i_vertex1, Point i_vertex2, Point i_vertex3);
-	explicit Triangle(const Triangle &i_triangle);
-	~Triangle();
+	class MODEL_API Triangle : public IShape
+	{
+	public:
+		Triangle();
+		Triangle(Point i_vertex1, Point i_vertex2, Point i_vertex3);
+		explicit Triangle(const Triangle &i_triangle);
+		~Triangle();
 
-	static std::string name();
-	void accept(ITransformation *i_transform);
+		static std::string name();
+		void accept(ITransformation *i_transform);
 
-	// For tests
-	const Point *const getVertices() const;
+		// For tests
+		const Point *const getVertices() const;
 
-private:
-	Point vertices[3];
-};
+	private:
+		Point vertices[3];
+	};
+}

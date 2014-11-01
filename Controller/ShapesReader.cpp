@@ -39,18 +39,18 @@ bool ShapesReader::read()
 
 			try
 			{
-				if (v_data.at(0).compare(Triangle::name()) == 0)
+				if (v_data.at(0).compare(Geometry::Triangle::name()) == 0)
 				{
 					// Square::Square(Point i_point, int i_side)
-					std::shared_ptr<IShape> ptr(new Triangle(Point(std::stoi(v_data.at(1)), std::stoi(v_data.at(2))),
-						Point(std::stoi(v_data.at(3)), std::stoi(v_data.at(4))),
-						Point(std::stoi(v_data.at(5)), std::stoi(v_data.at(6)))));
+					std::shared_ptr<IShape> ptr(new Geometry::Triangle(Geometry::Point(std::stoi(v_data.at(1)), std::stoi(v_data.at(2))),
+						Geometry::Point(std::stoi(v_data.at(3)), std::stoi(v_data.at(4))),
+						Geometry::Point(std::stoi(v_data.at(5)), std::stoi(v_data.at(6)))));
 					shapes.push_back(ptr);
 				}
-				else if (v_data.at(0).compare(Rectangle::name()) == 0)
+				else if (v_data.at(0).compare(Geometry::Rectangle::name()) == 0)
 				{
 					// Rectangle::Rectangle(Point i_point, int i_width, int i_height)
-					std::shared_ptr<IShape> ptr(new Rectangle(Point(std::stoi(v_data.at(1)), std::stoi(v_data.at(2))),
+					std::shared_ptr<IShape> ptr(new Geometry::Rectangle(Geometry::Point(std::stoi(v_data.at(1)), std::stoi(v_data.at(2))),
 															  std::stoi(v_data.at(3)),
 															  std::stoi(v_data.at(4))));
 					shapes.push_back(ptr);

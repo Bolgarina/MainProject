@@ -5,6 +5,7 @@
 #include <Model/Triangle.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace Geometry;
 
 namespace UnitTests
 {

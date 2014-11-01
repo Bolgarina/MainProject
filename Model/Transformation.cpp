@@ -4,15 +4,15 @@
 
 #include <iostream>
 
-void Transformation::visit(Triangle* i_trianle)
+void Transformation::visit(Geometry::Triangle* i_triangle)
 {
-	if (!i_trianle)
+	if (!i_triangle)
 		throw std::runtime_error("Exceptional case.");
 
 	std::cout << "*  " << std::endl << "* *" << std::endl << "*  *" << std::endl << "****" << std::endl << std::endl;
 }
 
-void Transformation::visit(Rectangle* i_rectangle)
+void Transformation::visit(Geometry::Rectangle* i_rectangle)
 {
 	if (!i_rectangle)
 		throw std::runtime_error("Exceptional case.");

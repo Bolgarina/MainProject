@@ -4,12 +4,15 @@
 
 #include "./ITransformation.h"
 
-class Triangle;
-class Rectangle;
+namespace Geometry
+{
+	class Triangle;
+	class Rectangle;
+}
 
 class MODEL_API Transformation : public ITransformation
 {
 public:
-	void visit(Triangle* i_trianle);
-	void visit(Rectangle* i_rectangle);
+	void visit(Geometry::Triangle* i_triangle);
+	void visit(Geometry::Rectangle* i_rectangle);
 };
