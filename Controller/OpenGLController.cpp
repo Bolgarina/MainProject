@@ -4,6 +4,7 @@
 
 #include <FreeGlew/glew.h>
 #include <FreeGlut/glut.h>
+#include <FreeGlut/freeglut_ext.h>
 
 #include <iostream>
 
@@ -25,6 +26,11 @@ namespace
 	void mouseCallback(int button, int state, int x, int y)
 	{
 		g_controller->mouse(button, state, x, y);
+	}
+
+	void mouseWheelCallback(int wheel, int direction, int x, int y)
+	{
+		g_controller->mouseWheel(wheel, direction, x, y);
 	}
 
 	void motionCallback(int x, int y)
@@ -70,6 +76,7 @@ void OpenGLController::init(int &i_argc, char **i_argv)
 	glutReshapeFunc(reshapeCallback);
 
 	glutMouseFunc(mouseCallback);
+	glutMouseWheelFunc(mouseWheelCallback);
 	glutMotionFunc(motionCallback);
 	glutKeyboardFunc(keyboardCallback);
 	glutSpecialFunc(keySpecialCallback);
@@ -117,6 +124,25 @@ void OpenGLController::mouse(int button, int state, int x, int y)
 			printLog("MIDDLE_BUTTON down");
 		if (state == GLUT_UP)
 			printLog("MIDDLE_BUTTON up");
+		break;
+	}
+}
+
+void OpenGLController::mouseWheel(int wheel, int direction, int x, int y)
+{
+	switch (direction)
+	{
+	case 1:
+		printLog("Stretching");
+		glScalef(2, 2, 1.0);
+		glutPostRedisplay();
+		break;
+	case -1:
+		printLog("Shrinking");
+		glScalef(0.5, 0.5, 1.0);
+		glutPostRedisplay();
+		break;
+	default:
 		break;
 	}
 }
