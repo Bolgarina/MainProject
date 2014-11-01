@@ -139,15 +139,23 @@ void OpenGLController::keySpecial(int key, int x, int y)
 	{
 	case GLUT_KEY_LEFT:
 		printLog("Left arrow key has been pressed.");
+		glTranslatef(-1.0, 0.0, 0.0);
+		glutPostRedisplay();
 		break;
 	case GLUT_KEY_DOWN:
 		printLog("Down arrow key has been pressed.");
+		glTranslatef(0.0, -1.0, 0.0);
+		glutPostRedisplay();
 		break;
 	case GLUT_KEY_RIGHT:
 		printLog("Right arrow key has been pressed.");
+		glTranslatef(1.0, 0.0, 0.0);
+		glutPostRedisplay();
 		break;
 	case GLUT_KEY_UP:
 		printLog("Up arrow key has been pressed.");
+		glTranslatef(0.0, 1.0, 0.0);
+		glutPostRedisplay();
 		break;
 	default:
 		printLog("Special key has been pressed.");
