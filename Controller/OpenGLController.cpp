@@ -1,3 +1,6 @@
+#define _USE_MATH_DEFINES // For using M_PI const
+#include <cmath>
+
 #include "./OpenGLController.h"
 
 #include <Model/Display.h>
@@ -5,6 +8,9 @@
 #include <FreeGlew/glew.h>
 #include <FreeGlut/glut.h>
 #include <FreeGlut/freeglut_ext.h>
+#include <Mathematics/ScaleMatrix.h>
+#include <Mathematics/RotationMatrix.h>
+#include <Mathematics/TranslationMatrix.h>
 
 #include <iostream>
 
@@ -13,7 +19,7 @@ namespace
 	// http://stackoverflow.com/questions/3589422/using-opengl-glutdisplayfunc-within-class
 	OpenGLController* g_controller; // g_ - global
 
-    void displayCallback()
+	void displayCallback()
 	{
 		g_controller->display();
 	}
@@ -49,7 +55,7 @@ namespace
 	}
 }
 
-OpenGLController::OpenGLController(ShapesReader::ShList *i_shapes) : shapes(i_shapes)
+OpenGLController::OpenGLController(ShapesReader::ShList *i_shapes) : shapes(i_shapes), transformationMatrix(4), LEFT_BUTTON_down(false), RIGHT_BUTTON_down(false)
 {
 }
 
@@ -58,7 +64,7 @@ void OpenGLController::init(int &i_argc, char **i_argv)
 	g_controller = this;
 
 	glutInit(&i_argc, i_argv);
-	
+
 	GLsizei width, height;
 	width = glutGet(GLUT_SCREEN_WIDTH);
 	height = glutGet(GLUT_SCREEN_HEIGHT);
@@ -72,7 +78,6 @@ void OpenGLController::init(int &i_argc, char **i_argv)
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
 	glutDisplayFunc(displayCallback);
-	//glutIdleFunc(display);
 	glutReshapeFunc(reshapeCallback);
 
 	glutMouseFunc(mouseCallback);
@@ -88,7 +93,7 @@ void OpenGLController::display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	Display display;
+	Display display(&transformationMatrix);
 	for (auto it = shapes->begin(); it != shapes->end(); it++)
 		(*it)->accept(&display);
 
@@ -98,9 +103,9 @@ void OpenGLController::display()
 void OpenGLController::reshape(int width, int height)
 {
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, 12.0, 0.0, 12.0, -1.0, 1.0);
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//glOrtho(0.0, 12.0, 0.0, 12.0, -1.0, 1.0);
 }
 
 void OpenGLController::mouse(int button, int state, int x, int y)
@@ -109,15 +114,27 @@ void OpenGLController::mouse(int button, int state, int x, int y)
 	{
 	case GLUT_LEFT_BUTTON:
 		if (state == GLUT_DOWN)
+		{
 			printLog("LEFT_BUTTON down");
-		if (state == GLUT_UP)
+			LEFT_BUTTON_down = true;
+		}
+		else if (state == GLUT_UP)
+		{
 			printLog("LEFT_BUTTON up");
+			LEFT_BUTTON_down = false;
+		}
 		break;
 	case GLUT_RIGHT_BUTTON:
 		if (state == GLUT_DOWN)
+		{
 			printLog("RIGHT_BUTTON down");
+			RIGHT_BUTTON_down = true;
+		}
 		if (state == GLUT_UP)
+		{
 			printLog("RIGHT_BUTTON up");
+			RIGHT_BUTTON_down = false;
+		}
 		break;
 	case GLUT_MIDDLE_BUTTON:
 		if (state == GLUT_DOWN)
@@ -133,15 +150,19 @@ void OpenGLController::mouseWheel(int wheel, int direction, int x, int y)
 	switch (direction)
 	{
 	case 1:
-		printLog("Stretching");
-		glScalef(2, 2, 1.0);
+	{
+		Math::ScaleMatrix scaleMatrix(2.0f, 2.0f, 2.0f);
+		transformationMatrix *= scaleMatrix;
 		glutPostRedisplay();
 		break;
+	}
 	case -1:
-		printLog("Shrinking");
-		glScalef(0.5, 0.5, 1.0);
+	{
+		Math::ScaleMatrix scaleMatrix(0.5f, 0.5f, 0.5f);
+		transformationMatrix *= scaleMatrix;
 		glutPostRedisplay();
 		break;
+	}
 	default:
 		break;
 	}
@@ -154,9 +175,56 @@ void OpenGLController::motion(int x, int y)
 
 void OpenGLController::keyboard(unsigned char key, int x, int y)
 {
-	std::string str;
-	str += key;
-	printLog("'" + str + "' has been pressed ( x = " + std::to_string(x) + ", y = " + std::to_string(y) + ")");
+	switch (key)
+	{
+	case 'y':
+	case 'Y':
+		if (RIGHT_BUTTON_down) // clockwise
+		{
+			Math::RotationMatrix rotateMatrix((float)(5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
+			transformationMatrix *= rotateMatrix;
+			glutPostRedisplay();
+		}
+		else if (LEFT_BUTTON_down) // counterclockwise
+		{
+			Math::RotationMatrix rotateMatrix((float)(-5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
+			transformationMatrix *= rotateMatrix;
+			glutPostRedisplay();
+		}
+		break;
+	case 'x':
+	case 'X':
+		if (RIGHT_BUTTON_down) // clockwise
+		{
+			Math::RotationMatrix rotateMatrix((float)(5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
+			transformationMatrix *= rotateMatrix;
+			glutPostRedisplay();
+		}
+		else if (LEFT_BUTTON_down) // counterclockwise
+		{
+			Math::RotationMatrix rotateMatrix((float)(-5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
+			transformationMatrix *= rotateMatrix;
+			glutPostRedisplay();
+		}
+		break;
+	case 'z':
+	case 'Z':
+		if (RIGHT_BUTTON_down) // clockwise
+		{
+			Math::RotationMatrix rotateMatrix((float)(5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
+			transformationMatrix *= rotateMatrix;
+			glutPostRedisplay();
+		}
+		else if (LEFT_BUTTON_down) // counterclockwise
+		{
+			Math::RotationMatrix rotateMatrix((float)(-5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
+			transformationMatrix *= rotateMatrix;
+			glutPostRedisplay();
+		}
+		break;
+	default:
+		std::cout << (int)key << std::endl;
+	}
 }
 
 void OpenGLController::keySpecial(int key, int x, int y)
@@ -164,25 +232,33 @@ void OpenGLController::keySpecial(int key, int x, int y)
 	switch (key)
 	{
 	case GLUT_KEY_LEFT:
-		printLog("Left arrow key has been pressed.");
-		glTranslatef(-1.0, 0.0, 0.0);
+	{
+		Math::TranslationMatrix translateMatrix(-0.1f, 0.0f, 0.0f);
+		transformationMatrix *= translateMatrix;
 		glutPostRedisplay();
 		break;
+	}
 	case GLUT_KEY_DOWN:
-		printLog("Down arrow key has been pressed.");
-		glTranslatef(0.0, -1.0, 0.0);
+	{
+		Math::TranslationMatrix translateMatrix(0.0f, -0.1f, 0.0f);
+		transformationMatrix *= translateMatrix;
 		glutPostRedisplay();
 		break;
+	}
 	case GLUT_KEY_RIGHT:
-		printLog("Right arrow key has been pressed.");
-		glTranslatef(1.0, 0.0, 0.0);
+	{
+		Math::TranslationMatrix translateMatrix(0.1f, 0.0f, 0.0f);
+		transformationMatrix *= translateMatrix;
 		glutPostRedisplay();
 		break;
+	}
 	case GLUT_KEY_UP:
-		printLog("Up arrow key has been pressed.");
-		glTranslatef(0.0, 1.0, 0.0);
+	{
+		Math::TranslationMatrix translateMatrix(0.0f, 0.1f, 0.0f);
+		transformationMatrix *= translateMatrix;
 		glutPostRedisplay();
 		break;
+	}
 	default:
 		printLog("Special key has been pressed.");
 		break;

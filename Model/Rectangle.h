@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 class IView;
 
@@ -16,21 +17,19 @@ namespace Geometry
 	{
 	public:
 		Rectangle();
-		Rectangle(Point i_point, int i_width, int i_height);
+		Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex);
 		explicit Rectangle(const Rectangle &i_rect);
 		~Rectangle();
 
 		static std::string name();
 		void accept(IView* i_view);
 
-		// For tests
-		const Point &getOrigin() const;
-		const size_t &getWidth() const;
-		const size_t &getHeight() const;
+		const Point &getLeftBottomVertex() const;
+		const Point &getRightTopVertex() const;
+		const std::vector<Point> getVertices() const;
 
 	private:
-		Point origin;
-		size_t width;
-		size_t height;
+		Point left_bottom_vertex;
+		Point right_top_vertex;
 	};
 }

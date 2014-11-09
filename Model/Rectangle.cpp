@@ -3,17 +3,19 @@
 
 namespace Geometry
 {
-	Rectangle::Rectangle() : origin(), width(1), height(1)
+	Rectangle::Rectangle() : left_bottom_vertex(), right_top_vertex(1.0f, 1.0f, 0.0f)
 	{
 	}
 
-	Rectangle::Rectangle(Point i_point, int i_width, int i_height) : origin(i_point), width(i_width), height(i_height)
+	Rectangle::Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex) : 
+		left_bottom_vertex(i_left_bottom_vertex), right_top_vertex(i_right_top_vertex)
 	{
-		if (width == 0 || height == 0)
-			throw std::logic_error("Width and height should be greater than 0.");
+		//if (width == 0 || height == 0)
+		//	throw std::logic_error("Width and height should be greater than 0.");
 	}
 
-	Rectangle::Rectangle(const Rectangle &i_rect) : origin(i_rect.origin), width(i_rect.width), height(i_rect.height)
+	Rectangle::Rectangle(const Rectangle &i_rect) : 
+		left_bottom_vertex(i_rect.left_bottom_vertex), right_top_vertex(i_rect.right_top_vertex)
 	{
 	}
 
@@ -34,18 +36,29 @@ namespace Geometry
 		i_view->visit(this);
 	}
 
-	const Point &Rectangle::getOrigin() const
+	const Point &Rectangle::getLeftBottomVertex() const
 	{
-		return origin;
+		return left_bottom_vertex;
 	}
 
-	const size_t &Rectangle::getWidth() const
+	const Point &Rectangle::getRightTopVertex() const
 	{
-		return width;
+		return right_top_vertex;
 	}
 
-	const size_t &Rectangle::getHeight() const
+	const std::vector<Point> Rectangle::getVertices() const
 	{
-		return height;
+		Point right_bottom_vertex(right_top_vertex.x, left_bottom_vertex.y, right_top_vertex.z);
+		Point left_top_vertex(left_bottom_vertex.x, right_top_vertex.y, left_bottom_vertex.z);
+
+		std::vector<Point> vertices;
+		vertices.push_back(left_bottom_vertex);
+		vertices.push_back(right_bottom_vertex);
+		vertices.push_back(left_top_vertex);
+		vertices.push_back(left_top_vertex);
+		vertices.push_back(right_bottom_vertex);
+		vertices.push_back(right_top_vertex);
+
+		return vertices;
 	}
 }

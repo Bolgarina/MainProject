@@ -87,7 +87,6 @@
     <ClCompile Include="Linking.cpp" />
     <ClCompile Include="PointTests.cpp" />
     <ClCompile Include="RectangleTests.cpp" />
-    <ClCompile Include="TransformationTests.cpp" />
     <ClCompile Include="TriangleTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

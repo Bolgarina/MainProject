@@ -5,9 +5,9 @@ namespace Geometry
 {
 	Triangle::Triangle()
 	{
-		vertices[0] = Point(0, 0);
-		vertices[1] = Point(1, 0);
-		vertices[2] = Point(0, 1);
+		vertices[0] = Point(0.0f, 0.0f, 0.0f);
+		vertices[1] = Point(1.0f, 0.0f, 0.0f);
+		vertices[2] = Point(0.0f, 1.0f, 0.0f);
 	}
 
 	Triangle::Triangle(Point i_vertex1, Point i_vertex2, Point i_vertex3)

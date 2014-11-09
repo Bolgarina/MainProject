@@ -7,13 +7,14 @@ namespace Geometry
 	struct MODEL_API Point
 	{
 		Point();
-		Point(int i_x, int i_y);
+		Point(float i_x, float i_y, float i_z);
 		Point(const Point &i_point);
 		~Point();
 
 		bool operator==(const Point &pt) const;
 
-		int x;
-		int y;
+		float x;
+		float y;
+		float z;
 	};
 }

@@ -33,8 +33,5 @@
     <ClCompile Include="TriangleTests.cpp">
       <Filter>Source Files\ModelTests</Filter>
     </ClCompile>
-    <ClCompile Include="TransformationTests.cpp">
-      <Filter>Source Files\ModelTests</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

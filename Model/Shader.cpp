@@ -52,7 +52,7 @@ std::string Shader::loadFromFile(const std::string &i_fileName) const
 
 	if (!file.is_open())
 	{
-		std::cout << "Failed to open file: " << i_fileName << std::endl;
+		std::cerr << "Failed to open file: " << i_fileName << std::endl;
 		exit(-1);
 	}
 

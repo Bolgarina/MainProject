@@ -5,6 +5,8 @@
 #include "./IController.h"
 #include "./ShapesReader.h"
 
+#include <Mathematics/BaseMatrix.h>
+
 #include <string>
 
 class CONTROLLER_API OpenGLController: public IController
@@ -28,4 +30,7 @@ public:
 
 private:
 	ShapesReader::ShList *shapes;
+	Math::BaseMatrix transformationMatrix;
+
+	bool LEFT_BUTTON_down, RIGHT_BUTTON_down;
 };
