@@ -84,6 +84,8 @@
   <ItemGroup>
     <ClInclude Include="BaseMatrix.h" />
     <ClInclude Include="DllApi.h" />
+    <ClInclude Include="FrustumProjectionMatrix.h" />
+    <ClInclude Include="AsymFrustumProjectionMatrix.h" />
     <ClInclude Include="OrthoMatrix.h" />
     <ClInclude Include="RotationMatrix.h" />
     <ClInclude Include="ScaleMatrix.h" />
@@ -91,7 +93,9 @@
     <ClInclude Include="_Link.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AsymFrustumProjectionMatrix.cpp" />
     <ClCompile Include="BaseMatrix.cpp" />
+    <ClCompile Include="FrustumProjectionMatrix.cpp" />
     <ClCompile Include="OrthoMatrix.cpp" />
     <ClCompile Include="RotationMatrix.cpp" />
     <ClCompile Include="ScaleMatrix.cpp" />

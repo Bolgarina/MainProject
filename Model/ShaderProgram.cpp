@@ -27,16 +27,21 @@ void ShaderProgram::init(const std::string &i_vsFile, const std::string &i_fsFil
 	shader_vp.compile();
 	shader_fp.compile();
 
-	program_id = glCreateProgram();
+	// Verifying that shaders compiled successfully
+
+	program_id = glCreateProgram(); // the returned value is zero if an error occured
 	glAttachShader(program_id, shader_fp.id());
 	glAttachShader(program_id, shader_vp.id());
 	glLinkProgram(program_id);
 
-	//validateProgram(program_id);
+	// Verifying that the shader link phase completed successfully
 }
 
 void ShaderProgram::bind() const
 {
+	if (!program_id)
+		std::cerr << "Program, which is passed to glUseProgram command, is zero. OpenGL's operation is undefined if no shader is bound." << std::endl;
+
 	glUseProgram(program_id);
 }
 
@@ -56,8 +61,8 @@ GLint ShaderProgram::getAttributeLocation(const std::string &i_attribute) const
 
 	if (attribute_location == -1)
 	{
-		std::cout << "Could not bind attrib " << i_attribute << std::endl;
-		exit(-1);
+		std::cerr << "Could not bind attribute " << i_attribute << std::endl;
+		exit(EXIT_FAILURE);
 	}
 
 	return attribute_location;
@@ -69,8 +74,8 @@ GLint ShaderProgram::getUniformLocation(const std::string &i_uniform) const
 
 	if (uniform_location == -1)
 	{
-		std::cout << "Could not bind attrib " << i_uniform << std::endl;
-		exit(-1);
+		std::cerr << "Could not bind uniform " << i_uniform << std::endl;
+		exit(EXIT_FAILURE);
 	}
 
 	return uniform_location;

@@ -63,6 +63,7 @@ void OpenGLController::init(int &i_argc, char **i_argv)
 {
 	g_controller = this;
 
+	// Window configuration
 	glutInit(&i_argc, i_argv);
 
 	GLsizei width, height;
@@ -70,10 +71,15 @@ void OpenGLController::init(int &i_argc, char **i_argv)
 	height = glutGet(GLUT_SCREEN_HEIGHT);
 	glutInitWindowSize((width / 2) - 4, height / 2);
 	glutInitWindowPosition(width / 4, height / 4);
+	// Type of the window
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 	glutCreateWindow("3D scene");
 
-	glewInit();
+	if (glewInit())
+	{
+		std::cerr << "Unable to initialize GLEW ...exiting" << std::endl;
+		exit(EXIT_FAILURE);
+	};
 
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 

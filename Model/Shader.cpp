@@ -11,6 +11,7 @@ Shader::Shader() : shader_id(0)
 Shader::~Shader()
 {
 	glDeleteShader(shader_id);
+	// shader is tagged for deletion and deleted if it is no longer being used by any shader program
 }
 
 void Shader::init(const GLenum &i_type, const std::string &i_fileName)
