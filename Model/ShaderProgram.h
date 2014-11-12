@@ -19,6 +19,7 @@ public:
 	void bind() const;         // to enable the shader program
 	void unbind() const;       // to disable the shader program
 	const GLuint &id() const;  // to get the number associated with the shader program, so that variable can be passed through to the shader program
+	bool validateProgram() const;
 
 	GLint getAttributeLocation(const std::string &i_attribute) const; // Returns the bound location of a named attribute
 	GLint getUniformLocation(const std::string &i_uniform) const;     // Method to returns the bound location of a named uniform

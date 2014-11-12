@@ -26,15 +26,12 @@ namespace Math
 		BaseMatrix& operator*=(const BaseMatrix& rhs);
 		BaseMatrix transpose();
 
-		// Matrix/scalar operations                                                                                                                                                                                                     
-		BaseMatrix operator+(const float& rhs);
-		BaseMatrix operator-(const float& rhs);
+		// Matrix/scalar operations
 		BaseMatrix operator*(const float& rhs);
 		BaseMatrix operator/(const float& rhs);
 
 		// Matrix/vector operations                                                                                                                                                                                                     
 		std::vector<float> operator*(const std::vector<float>& rhs);
-		std::vector<float> diag_vec() const;
 		std::vector<float> get_matrix() const;
 
 		// Access the individual elements                                                                                                                                                                                               

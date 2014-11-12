@@ -28,13 +28,20 @@ void ShaderProgram::init(const std::string &i_vsFile, const std::string &i_fsFil
 	shader_fp.compile();
 
 	// Verifying that shaders compiled successfully
+	if (shader_vp.validateShader() && shader_fp.validateShader())
+	{
+		program_id = glCreateProgram(); // the returned value is zero if an error occured
+		glAttachShader(program_id, shader_fp.id());
+		glAttachShader(program_id, shader_vp.id());
+		glLinkProgram(program_id);
 
-	program_id = glCreateProgram(); // the returned value is zero if an error occured
-	glAttachShader(program_id, shader_fp.id());
-	glAttachShader(program_id, shader_vp.id());
-	glLinkProgram(program_id);
-
-	// Verifying that the shader link phase completed successfully
+		// If the shader link phase completed unsuccessfully...
+		if (!validateProgram())
+		{
+			std::cerr << "The shader link phase completed unsuccessfully." << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
 }
 
 void ShaderProgram::bind() const
@@ -53,6 +60,26 @@ void ShaderProgram::unbind() const
 const GLuint &ShaderProgram::id() const
 {
 	return program_id;
+}
+
+bool ShaderProgram::validateProgram() const
+{
+	GLint isLinked = 0;
+	glGetProgramiv(program_id, GL_LINK_STATUS, &isLinked);
+	if (isLinked == GL_FALSE)
+	{
+		GLint maxLength = 0;
+		glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &maxLength);
+
+		std::vector<GLchar> infoLog(maxLength);
+		glGetProgramInfoLog(program_id, maxLength, &maxLength, &infoLog[0]);
+
+		// glDeleteProgram(program);
+		return false;
+	}
+	
+	// Shader link phase completed successfully
+	return true;
 }
 
 GLint ShaderProgram::getAttributeLocation(const std::string &i_attribute) const

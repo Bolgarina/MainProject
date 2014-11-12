@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 Shader::Shader() : shader_id(0)
 {
@@ -45,6 +46,26 @@ const GLuint &Shader::id() const
 void Shader::compile() const
 {
 	glCompileShader(shader_id);
+}
+
+bool Shader::validateShader() const
+{
+	GLint isCompiled = 0;
+	glGetShaderiv(shader_id, GL_COMPILE_STATUS, &isCompiled);
+	if (isCompiled == GL_FALSE)
+	{
+		GLint maxLength = 0;
+		glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &maxLength);
+
+		std::vector<char> errorLog(maxLength);
+		glGetShaderInfoLog(shader_id, maxLength, &maxLength, &errorLog[0]);
+
+		// glDeleteShader(shader_id);
+		return false;
+	}
+
+	// Shader compilation is successful
+	return true; 
 }
 
 std::string Shader::loadFromFile(const std::string &i_fileName) const

@@ -149,30 +149,6 @@ namespace Math
 		return result;
 	}
 
-	// Matrix/scalar addition                                                                                                                                                     
-	BaseMatrix BaseMatrix::operator+(const float& rhs)
-	{
-		BaseMatrix result(rows, cols, 0.0);
-
-		for (unsigned i = 0; i < rows; i++)
-			for (unsigned j = 0; j < cols; j++)
-				result(i, j) = this->matrix[i][j] + rhs;
-
-		return result;
-	}
-
-	// Matrix/scalar subtraction                                                                                                                                                  
-	BaseMatrix BaseMatrix::operator-(const float& rhs)
-	{
-		BaseMatrix result(rows, cols, 0.0);
-
-		for (unsigned i = 0; i < rows; i++)
-			for (unsigned j = 0; j < cols; j++)
-				result(i, j) = this->matrix[i][j] - rhs;
-
-		return result;
-	}
-
 	// Matrix/scalar multiplication                                                                                                                                               
 	BaseMatrix BaseMatrix::operator*(const float& rhs)
 	{
@@ -205,17 +181,6 @@ namespace Math
 		for (unsigned i = 0; i < rows; i++)
 			for (unsigned j = 0; j < cols; j++)
 				result[i] = this->matrix[i][j] * rhs[j];
-
-		return result;
-	}
-
-	// Obtain a vector of the diagonal elements                                                                                                                                   
-	std::vector<float> BaseMatrix::diag_vec() const
-	{
-		std::vector<float> result(rows, 0.0);
-
-		for (unsigned i = 0; i < rows; i++)
-			result[i] = this->matrix[i][i];
 
 		return result;
 	}

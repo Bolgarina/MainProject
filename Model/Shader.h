@@ -16,6 +16,7 @@ public:
 	void init(const GLenum &i_type, const std::string &i_fileName);
 	const GLuint &id() const;
 	void compile() const;
+	bool validateShader() const;
 
 private:
 	GLuint shader_id;
