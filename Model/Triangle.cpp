@@ -52,4 +52,10 @@ namespace Geometry
 	{
 		return vertices;
 	}
+	const Point Triangle::getCentroid() const
+	{
+		return Point((vertices[0].x + vertices[1].x + vertices[2].x) / 3.0f,
+			(vertices[0].y + vertices[1].y + vertices[2].y) / 3.0f,
+			(vertices[0].z + vertices[1].z + vertices[2].z) / 3.0f);
+	}
 }

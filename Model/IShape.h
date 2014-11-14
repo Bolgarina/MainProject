@@ -16,5 +16,6 @@ namespace Geometry
 
 		virtual void accept(IView*) = 0;
 		virtual const std::vector<Point> getVertices() const = 0;
+		virtual const Point getCentroid() const = 0;
 	};
 }

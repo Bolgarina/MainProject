@@ -27,6 +27,7 @@ namespace Geometry
 		const Point &getLeftBottomVertex() const;
 		const Point &getRightTopVertex() const;
 		const std::vector<Point> getVertices() const;
+		const Point getCentroid() const;
 
 	private:
 		Point left_bottom_vertex;

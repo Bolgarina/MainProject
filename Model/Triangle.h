@@ -25,6 +25,7 @@ namespace Geometry
 
 		// For tests
 		const std::vector<Point> getVertices() const;
+		const Point getCentroid() const;
 
 	private:
 		std::vector<Point> vertices;

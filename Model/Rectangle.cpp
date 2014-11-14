@@ -61,4 +61,11 @@ namespace Geometry
 
 		return vertices;
 	}
+
+	const Point Rectangle::getCentroid() const
+	{
+		return Point((left_bottom_vertex.x + right_top_vertex.x) / 2.0f,
+			(left_bottom_vertex.y + right_top_vertex.y) / 2.0f,
+			(left_bottom_vertex.z + right_top_vertex.z) / 2.0f);
+	}
 }
