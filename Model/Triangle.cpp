@@ -48,14 +48,23 @@ namespace Geometry
 		i_view->visit(this);
 	}
 
-	const std::vector<Point> Triangle::getVertices() const
+	std::vector<Point> Triangle::getVertices() const
 	{
 		return vertices;
 	}
+
 	const Point Triangle::getCentroid() const
 	{
 		return Point((vertices[0].x + vertices[1].x + vertices[2].x) / 3.0f,
 			(vertices[0].y + vertices[1].y + vertices[2].y) / 3.0f,
 			(vertices[0].z + vertices[1].z + vertices[2].z) / 3.0f);
+	}
+
+	void Triangle::setVertex(size_t i_index, Point i_pt)
+	{
+		if ((i_index > 2) || (i_index < 0))
+			throw std::logic_error("Invalid argument (out of range).");
+
+		vertices[i_index] = i_pt;
 	}
 }

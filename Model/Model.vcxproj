@@ -90,8 +90,11 @@
     <ClInclude Include="IView.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="Rotator.h" />
+    <ClInclude Include="Scaler.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Translator.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="_Link.h" />
   </ItemGroup>
@@ -100,8 +103,11 @@
     <ClCompile Include="Linking.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="Rotator.cpp" />
+    <ClCompile Include="Scaler.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Translator.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -46,7 +46,7 @@ namespace Geometry
 		return right_top_vertex;
 	}
 
-	const std::vector<Point> Rectangle::getVertices() const
+	std::vector<Point> Rectangle::getVertices() const
 	{
 		Point right_bottom_vertex(right_top_vertex.x, left_bottom_vertex.y, right_top_vertex.z);
 		Point left_top_vertex(left_bottom_vertex.x, right_top_vertex.y, left_bottom_vertex.z);
@@ -67,5 +67,15 @@ namespace Geometry
 		return Point((left_bottom_vertex.x + right_top_vertex.x) / 2.0f,
 			(left_bottom_vertex.y + right_top_vertex.y) / 2.0f,
 			(left_bottom_vertex.z + right_top_vertex.z) / 2.0f);
+	}
+
+	void Rectangle::setLeftBottomVertex(Point i_pt)
+	{
+		left_bottom_vertex = i_pt;
+	}
+
+	void Rectangle::setRightTopVertex(Point i_pt)
+	{
+		right_top_vertex = i_pt;
 	}
 }

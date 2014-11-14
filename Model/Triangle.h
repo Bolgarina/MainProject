@@ -23,9 +23,10 @@ namespace Geometry
 		static std::string name();
 		void accept(IView *i_view);
 
-		// For tests
-		const std::vector<Point> getVertices() const;
+		std::vector<Point> getVertices() const;
 		const Point getCentroid() const;
+
+		void setVertex(size_t i_index, Point i_pt);
 
 	private:
 		std::vector<Point> vertices;
