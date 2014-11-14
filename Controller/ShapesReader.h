@@ -10,7 +10,7 @@
 class CONTROLLER_API ShapesReader
 {
 public:
-	typedef std::list<std::shared_ptr<IShape>> ShList;
+	typedef std::list<std::shared_ptr<Geometry::IShape>> ShList;
 
 	ShapesReader(const std::string i_name);
 	~ShapesReader();

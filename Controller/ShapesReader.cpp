@@ -41,14 +41,14 @@ bool ShapesReader::read()
 			{
 				if (v_data.at(0).compare(Geometry::Triangle::name()) == 0)
 				{
-					std::shared_ptr<IShape> ptr(new Geometry::Triangle(Geometry::Point(std::stof(v_data.at(1)), std::stof(v_data.at(2)), std::stof(v_data.at(3))),
+					std::shared_ptr<Geometry::IShape> ptr(new Geometry::Triangle(Geometry::Point(std::stof(v_data.at(1)), std::stof(v_data.at(2)), std::stof(v_data.at(3))),
 						Geometry::Point(std::stof(v_data.at(4)), std::stof(v_data.at(5)), std::stof(v_data.at(6))),
 						Geometry::Point(std::stof(v_data.at(7)), std::stof(v_data.at(8)), std::stof(v_data.at(9)))));
 					shapes.push_back(ptr);
 				}
 				else if (v_data.at(0).compare(Geometry::Rectangle::name()) == 0)
 				{
-					std::shared_ptr<IShape> ptr(new Geometry::Rectangle(Geometry::Point(std::stof(v_data.at(1)), std::stof(v_data.at(2)), std::stof(v_data.at(3))),
+					std::shared_ptr<Geometry::IShape> ptr(new Geometry::Rectangle(Geometry::Point(std::stof(v_data.at(1)), std::stof(v_data.at(2)), std::stof(v_data.at(3))),
 						Geometry::Point(std::stof(v_data.at(4)), std::stof(v_data.at(5)), std::stof(v_data.at(6)))));
 					shapes.push_back(ptr);
 				}

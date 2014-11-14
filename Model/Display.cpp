@@ -23,10 +23,14 @@ void Display::visit(Geometry::Triangle *i_triangle)
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	// add check of null (i_triangle->getVertices())
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*i_triangle->getVertices()) * 3, i_triangle->getVertices(), GL_STATIC_DRAW);
 	
-	sh_program.bind();
+	const std::vector<Geometry::Point> triangle = i_triangle->getVertices();
+
+	if (triangle.size() == 3)
+	{
+		glBufferData(GL_ARRAY_BUFFER, sizeof(triangle[0]) * triangle.size(), &triangle.front(), GL_STATIC_DRAW);
+
+		sh_program.bind();
 		sh_program.setUniformMatrix(u_transformationMatrix, *p_transformationMatrix);
 
 		std::vector<float> red(4, 1.0f); red[1] = red[2] = 0.0f;
@@ -37,7 +41,8 @@ void Display::visit(Geometry::Triangle *i_triangle)
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glDisableVertexAttribArray(a_coord);
-	sh_program.unbind();
+		sh_program.unbind();
+	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDeleteBuffers(1, &VBO);

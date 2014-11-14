@@ -24,9 +24,9 @@ namespace Geometry
 		void accept(IView *i_view);
 
 		// For tests
-		const Point *const getVertices() const;
+		const std::vector<Point> getVertices() const;
 
 	private:
-		Point vertices[3];
+		std::vector<Point> vertices;
 	};
 }

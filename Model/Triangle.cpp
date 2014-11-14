@@ -5,9 +5,11 @@ namespace Geometry
 {
 	Triangle::Triangle()
 	{
-		vertices[0] = Point(0.0f, 0.0f, 0.0f);
-		vertices[1] = Point(1.0f, 0.0f, 0.0f);
-		vertices[2] = Point(0.0f, 1.0f, 0.0f);
+		vertices.reserve(3);
+
+		vertices.push_back(Point(0.0f, 0.0f, 0.0f));
+		vertices.push_back(Point(1.0f, 0.0f, 0.0f));
+		vertices.push_back(Point(0.0f, 1.0f, 0.0f));
 	}
 
 	Triangle::Triangle(Point i_vertex1, Point i_vertex2, Point i_vertex3)
@@ -15,16 +17,18 @@ namespace Geometry
 		if (i_vertex1 == i_vertex2 || i_vertex1 == i_vertex3 || i_vertex2 == i_vertex3)
 			throw std::logic_error("Vertices should be different.");
 
-		vertices[0] = i_vertex1;
-		vertices[1] = i_vertex2;
-		vertices[2] = i_vertex3;
+		vertices.reserve(3);
+
+		vertices.push_back(i_vertex1);
+		vertices.push_back(i_vertex2);
+		vertices.push_back(i_vertex3);
 	}
 
 	Triangle::Triangle(const Triangle &i_triangle)
 	{
-		vertices[0] = i_triangle.getVertices()[0];
-		vertices[1] = i_triangle.getVertices()[1];
-		vertices[2] = i_triangle.getVertices()[2];
+		vertices.push_back(i_triangle.getVertices()[0]);
+		vertices.push_back(i_triangle.getVertices()[1]);
+		vertices.push_back(i_triangle.getVertices()[2]);
 	}
 
 	Triangle::~Triangle()
@@ -44,7 +48,7 @@ namespace Geometry
 		i_view->visit(this);
 	}
 
-	const Point *const Triangle::getVertices() const
+	const std::vector<Point> Triangle::getVertices() const
 	{
 		return vertices;
 	}
