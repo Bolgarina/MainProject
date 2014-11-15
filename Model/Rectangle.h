@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-class IView;
+class IVisitor;
 
 namespace Geometry
 {
@@ -22,7 +22,7 @@ namespace Geometry
 		~Rectangle();
 
 		static std::string name();
-		void accept(IView* i_view);
+		void accept(IVisitor* i_view);
 
 		const Point &getLeftBottomVertex() const;
 		const Point &getRightTopVertex() const;
@@ -33,7 +33,15 @@ namespace Geometry
 		void setRightTopVertex(Point i_pt);
 
 	private:
-		Point left_bottom_vertex;
-		Point right_top_vertex;
+		enum ECorner
+		{
+			ELEFT_BOTTOM = 0,
+			ERIGHT_TOP,
+		};
+		
+#pragma warning (push)
+#pragma warning(disable:4251)
+		std::vector<Point> vertices;
+#pragma warning (pop)
 	};
 }

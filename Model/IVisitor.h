@@ -8,10 +8,10 @@ namespace Geometry
 	class Rectangle;
 }
 
-class MODEL_API IView
+class MODEL_API IVisitor
 {
 public:
-	virtual ~IView() {};
+	virtual ~IVisitor() {};
 
 	virtual void visit(Geometry::Triangle*) = 0;
 	virtual void visit(Geometry::Rectangle*) = 0;

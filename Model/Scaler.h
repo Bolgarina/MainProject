@@ -2,7 +2,7 @@
 
 #include "./DllApi.h"
 
-#include "./IView.h"
+#include "./IVisitor.h"
 
 namespace Geometry
 {
@@ -10,7 +10,7 @@ namespace Geometry
 	class Rectangle;
 }
 
-class MODEL_API Scaler : public IView
+class MODEL_API Scaler : public IVisitor
 {
 public:
 	Scaler(const float &i_sx, const float &i_sy, const float &i_sz);

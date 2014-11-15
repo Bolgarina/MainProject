@@ -1,22 +1,29 @@
 #include "./Rectangle.h"
-#include "./IView.h"
+#include "./IVisitor.h"
 
 namespace Geometry
 {
-	Rectangle::Rectangle() : left_bottom_vertex(), right_top_vertex(1.0f, 1.0f, 0.0f)
+	Rectangle::Rectangle()
 	{
+		vertices.reserve(2);
+		vertices.push_back(Point());
+		vertices.push_back(Point(1.0f, 1.0f, 0.0f));
 	}
 
-	Rectangle::Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex) : 
-		left_bottom_vertex(i_left_bottom_vertex), right_top_vertex(i_right_top_vertex)
+	Rectangle::Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex)
 	{
 		//if (width == 0 || height == 0)
 		//	throw std::logic_error("Width and height should be greater than 0.");
+		vertices.reserve(2);
+		vertices.push_back(i_left_bottom_vertex);
+		vertices.push_back(i_right_top_vertex);
 	}
 
-	Rectangle::Rectangle(const Rectangle &i_rect) : 
-		left_bottom_vertex(i_rect.left_bottom_vertex), right_top_vertex(i_rect.right_top_vertex)
+	Rectangle::Rectangle(const Rectangle &i_rect)// : 
 	{
+		vertices.reserve(2);
+		vertices.push_back(i_rect.getLeftBottomVertex());
+		vertices.push_back(i_rect.getRightTopVertex());
 	}
 
 	Rectangle::~Rectangle()
@@ -28,7 +35,7 @@ namespace Geometry
 		return "rectangle";
 	}
 
-	void Rectangle::accept(IView *i_view)
+	void Rectangle::accept(IVisitor *i_view)
 	{
 		if (!i_view)
 			throw std::runtime_error("Exceptional case.");
@@ -38,16 +45,18 @@ namespace Geometry
 
 	const Point &Rectangle::getLeftBottomVertex() const
 	{
-		return left_bottom_vertex;
+		return vertices[ELEFT_BOTTOM];
 	}
 
 	const Point &Rectangle::getRightTopVertex() const
 	{
-		return right_top_vertex;
+		return vertices[ERIGHT_TOP];
 	}
 
 	std::vector<Point> Rectangle::getVertices() const
 	{
+		Point right_top_vertex = getRightTopVertex();
+		Point left_bottom_vertex = getLeftBottomVertex();
 		Point right_bottom_vertex(right_top_vertex.x, left_bottom_vertex.y, right_top_vertex.z);
 		Point left_top_vertex(left_bottom_vertex.x, right_top_vertex.y, left_bottom_vertex.z);
 
@@ -64,18 +73,18 @@ namespace Geometry
 
 	const Point Rectangle::getCentroid() const
 	{
-		return Point((left_bottom_vertex.x + right_top_vertex.x) / 2.0f,
-			(left_bottom_vertex.y + right_top_vertex.y) / 2.0f,
-			(left_bottom_vertex.z + right_top_vertex.z) / 2.0f);
+		return Point((getLeftBottomVertex().x + getRightTopVertex().x) / 2.0f,
+			(getLeftBottomVertex().y + getRightTopVertex().y) / 2.0f,
+			(getLeftBottomVertex().z + getRightTopVertex().z) / 2.0f);
 	}
 
 	void Rectangle::setLeftBottomVertex(Point i_pt)
 	{
-		left_bottom_vertex = i_pt;
+		vertices[ELEFT_BOTTOM] = i_pt;
 	}
 
 	void Rectangle::setRightTopVertex(Point i_pt)
 	{
-		right_top_vertex = i_pt;
+		vertices[ERIGHT_TOP] = i_pt;
 	}
 }

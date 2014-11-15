@@ -3,14 +3,12 @@
 
 #include "./OpenGLController.h"
 
-#include <Model/Display.h>
-
-#include <FreeGlew/glew.h>
-#include <FreeGlut/glut.h>
-#include <FreeGlut/freeglut_ext.h>
 #include <Mathematics/ScaleMatrix.h>
 #include <Mathematics/RotationMatrix.h>
 #include <Mathematics/TranslationMatrix.h>
+
+#include <Model/Model.h>
+#include <View/View.h>
 
 #include <iostream>
 
@@ -55,63 +53,37 @@ namespace
 	}
 }
 
-OpenGLController::OpenGLController(ShapesReader::ShList *i_shapes) : shapes(i_shapes), transformationMatrix(4), LEFT_BUTTON_down(false), RIGHT_BUTTON_down(false)
+OpenGLController::OpenGLController(Model *i_model, View* i_view) : model(i_model), view(i_view), LEFT_BUTTON_down(false), RIGHT_BUTTON_down(false)
 {
+	if (!i_view || !i_model)
+		throw std::runtime_error("Empty view/model");
 }
 
 void OpenGLController::init(int &i_argc, char **i_argv)
 {
 	g_controller = this;
 
-	// Window configuration
-	glutInit(&i_argc, i_argv);
+	view->startInit(i_argc, i_argv);
 
-	GLsizei width, height;
-	width = glutGet(GLUT_SCREEN_WIDTH);
-	height = glutGet(GLUT_SCREEN_HEIGHT);
-	glutInitWindowSize((width / 2) - 4, height / 2);
-	glutInitWindowPosition(width / 4, height / 4);
-	// Type of the window
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-	glutCreateWindow("3D scene");
+	view->setDisplayCallback(displayCallback);
+	view->setReshapeCallback(reshapeCallback);
+	view->setMouseCallback(mouseCallback);
+	view->setMouseWheelCallback(mouseWheelCallback);
+	view->setMotionCallback(motionCallback);
+	view->setKeyboardCallback(keyboardCallback);
+	view->setKeySpecialCallback(keySpecialCallback);
 
-	if (glewInit())
-	{
-		std::cerr << "Unable to initialize GLEW ...exiting" << std::endl;
-		exit(EXIT_FAILURE);
-	};
-
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-
-	glutDisplayFunc(displayCallback);
-	glutReshapeFunc(reshapeCallback);
-
-	glutMouseFunc(mouseCallback);
-	glutMouseWheelFunc(mouseWheelCallback);
-	glutMotionFunc(motionCallback);
-	glutKeyboardFunc(keyboardCallback);
-	glutSpecialFunc(keySpecialCallback);
-
-	glutMainLoop();
+	view->finishInit();
 }
 
 void OpenGLController::display()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	Display display(&transformationMatrix);
-	for (auto it = shapes->begin(); it != shapes->end(); it++)
-		(*it)->accept(&display);
-
-	glutSwapBuffers();
+	view->display(&model->getTransformationMatrix(), model->getData());
 }
 
 void OpenGLController::reshape(int width, int height)
 {
-	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-	//glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	//glOrtho(0.0, 12.0, 0.0, 12.0, -1.0, 1.0);
+	view->reshape(width, height);
 }
 
 void OpenGLController::mouse(int button, int state, int x, int y)
@@ -158,15 +130,15 @@ void OpenGLController::mouseWheel(int wheel, int direction, int x, int y)
 	case 1:
 	{
 		Math::ScaleMatrix scaleMatrix(2.0f, 2.0f, 2.0f);
-		transformationMatrix *= scaleMatrix;
-		glutPostRedisplay();
+		model->addTransformation(scaleMatrix);
+		view->postRedisplay();
 		break;
 	}
 	case -1:
 	{
 		Math::ScaleMatrix scaleMatrix(0.5f, 0.5f, 0.5f);
-		transformationMatrix *= scaleMatrix;
-		glutPostRedisplay();
+		model->addTransformation(scaleMatrix);
+		view->postRedisplay();
 		break;
 	}
 	default:
@@ -188,14 +160,14 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 		if (RIGHT_BUTTON_down) // clockwise
 		{
 			Math::RotationMatrix rotateMatrix((float)(5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
-			transformationMatrix *= rotateMatrix;
-			glutPostRedisplay();
+			model->addTransformation(rotateMatrix);
+			view->postRedisplay();
 		}
 		else if (LEFT_BUTTON_down) // counterclockwise
 		{
 			Math::RotationMatrix rotateMatrix((float)(-5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
-			transformationMatrix *= rotateMatrix;
-			glutPostRedisplay();
+			model->addTransformation(rotateMatrix);
+			view->postRedisplay();
 		}
 		break;
 	case 'x':
@@ -203,14 +175,14 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 		if (RIGHT_BUTTON_down) // clockwise
 		{
 			Math::RotationMatrix rotateMatrix((float)(5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
-			transformationMatrix *= rotateMatrix;
-			glutPostRedisplay();
+			model->addTransformation(rotateMatrix);
+			view->postRedisplay();
 		}
 		else if (LEFT_BUTTON_down) // counterclockwise
 		{
 			Math::RotationMatrix rotateMatrix((float)(-5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
-			transformationMatrix *= rotateMatrix;
-			glutPostRedisplay();
+			model->addTransformation(rotateMatrix);
+			view->postRedisplay();
 		}
 		break;
 	case 'z':
@@ -218,14 +190,14 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 		if (RIGHT_BUTTON_down) // clockwise
 		{
 			Math::RotationMatrix rotateMatrix((float)(5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
-			transformationMatrix *= rotateMatrix;
-			glutPostRedisplay();
+			model->addTransformation(rotateMatrix);
+			view->postRedisplay();
 		}
 		else if (LEFT_BUTTON_down) // counterclockwise
 		{
 			Math::RotationMatrix rotateMatrix((float)(-5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
-			transformationMatrix *= rotateMatrix;
-			glutPostRedisplay();
+			model->addTransformation(rotateMatrix);
+			view->postRedisplay();
 		}
 		break;
 	default:
@@ -240,29 +212,29 @@ void OpenGLController::keySpecial(int key, int x, int y)
 	case GLUT_KEY_LEFT:
 	{
 		Math::TranslationMatrix translateMatrix(-0.1f, 0.0f, 0.0f);
-		transformationMatrix *= translateMatrix;
-		glutPostRedisplay();
+		model->addTransformation(translateMatrix);
+		view->postRedisplay();
 		break;
 	}
 	case GLUT_KEY_DOWN:
 	{
 		Math::TranslationMatrix translateMatrix(0.0f, -0.1f, 0.0f);
-		transformationMatrix *= translateMatrix;
-		glutPostRedisplay();
+		model->addTransformation(translateMatrix);
+		view->postRedisplay();
 		break;
 	}
 	case GLUT_KEY_RIGHT:
 	{
 		Math::TranslationMatrix translateMatrix(0.1f, 0.0f, 0.0f);
-		transformationMatrix *= translateMatrix;
-		glutPostRedisplay();
+		model->addTransformation(translateMatrix);
+		view->postRedisplay();
 		break;
 	}
 	case GLUT_KEY_UP:
 	{
 		Math::TranslationMatrix translateMatrix(0.0f, 0.1f, 0.0f);
-		transformationMatrix *= translateMatrix;
-		glutPostRedisplay();
+		model->addTransformation(translateMatrix);
+		view->postRedisplay();
 		break;
 	}
 	default:

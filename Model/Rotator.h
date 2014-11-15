@@ -2,7 +2,7 @@
 
 #include "./DllApi.h"
 
-#include "./IView.h"
+#include "./IVisitor.h"
 
 namespace Geometry
 {
@@ -10,7 +10,7 @@ namespace Geometry
 	class Rectangle;
 }
 
-class MODEL_API Rotator : public IView
+class MODEL_API Rotator : public IVisitor
 {
 public:
 	Rotator(const float &i_angle,

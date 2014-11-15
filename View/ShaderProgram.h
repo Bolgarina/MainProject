@@ -8,7 +8,7 @@
 #include <vector>
 #include <Mathematics/BaseMatrix.h>
 
-class MODEL_API ShaderProgram
+class VIEW_API ShaderProgram
 {
 public:
 	ShaderProgram();

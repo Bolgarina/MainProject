@@ -2,7 +2,7 @@
 
 #include "./DllApi.h"
 
-#include "./IView.h"
+#include "./IVisitor.h"
 
 namespace Geometry
 {
@@ -10,7 +10,7 @@ namespace Geometry
 	class Rectangle;
 }
 
-class MODEL_API Translator : public IView
+class MODEL_API Translator : public IVisitor
 {
 public:
 	Translator(const float &i_dx, const float &i_dy, const float &i_dz);

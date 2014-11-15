@@ -16,7 +16,7 @@ public:
 	~ShapesReader();
 
 	bool read();
-	const ShList &getShapes() const;
+	ShList &getShapes();
 
 private:
 #pragma warning (push)

@@ -7,7 +7,7 @@
 
 #include <string>
 
-class MODEL_API Shader
+class VIEW_API Shader
 {
 public:
 	Shader();

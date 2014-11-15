@@ -5,7 +5,7 @@
 
 #include <vector>
 
-class IView;
+class IVisitor;
 
 namespace Geometry
 {
@@ -14,7 +14,7 @@ namespace Geometry
 	public:
 		virtual ~IShape() {};
 
-		virtual void accept(IView*) = 0;
+		virtual void accept(IVisitor*) = 0;
 		virtual std::vector<Point> getVertices() const = 0;
 		virtual const Point getCentroid() const = 0;
 	};

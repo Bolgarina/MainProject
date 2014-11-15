@@ -1,5 +1,5 @@
 #include "./Triangle.h"
-#include "./IView.h"
+#include "./IVisitor.h"
 
 namespace Geometry
 {
@@ -40,7 +40,7 @@ namespace Geometry
 		return "triangle";
 	}
 
-	void Triangle::accept(IView *i_view)
+	void Triangle::accept(IVisitor *i_view)
 	{
 		if (!i_view)
 			throw std::runtime_error("Exceptional case.");

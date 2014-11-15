@@ -5,14 +5,15 @@
 #include "./IController.h"
 #include "./ShapesReader.h"
 
-#include <Mathematics/BaseMatrix.h>
-
 #include <string>
+
+class Model;
+class View;
 
 class CONTROLLER_API OpenGLController: public IController
 {
 public:
-	OpenGLController(ShapesReader::ShList *i_shapes);
+	OpenGLController(Model *i_model, View* i_view);
 
 	void init(int &i_argc, char **i_argv);
 
@@ -29,8 +30,8 @@ public:
 	void printLog(const std::string &log);
 
 private:
-	ShapesReader::ShList *shapes;
-	Math::BaseMatrix transformationMatrix;
+	Model *model;
+	View *view;
 
 	bool LEFT_BUTTON_down, RIGHT_BUTTON_down;
 };

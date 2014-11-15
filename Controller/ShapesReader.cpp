@@ -80,7 +80,7 @@ bool ShapesReader::read()
 	return true;
 }
 
-const ShapesReader::ShList &ShapesReader::getShapes() const
+ShapesReader::ShList &ShapesReader::getShapes()
 {
 	return shapes;
 }

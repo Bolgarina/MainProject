@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 
-class IView;
+class IVisitor;
 
 namespace Geometry
 {
@@ -21,7 +21,7 @@ namespace Geometry
 		~Triangle();
 
 		static std::string name();
-		void accept(IView *i_view);
+		void accept(IVisitor *i_view);
 
 		std::vector<Point> getVertices() const;
 		const Point getCentroid() const;
@@ -29,6 +29,9 @@ namespace Geometry
 		void setVertex(size_t i_index, Point i_pt);
 
 	private:
+#pragma warning (push)
+#pragma warning(disable:4251)
 		std::vector<Point> vertices;
+#pragma warning (pop)
 	};
 }
