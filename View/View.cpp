@@ -29,7 +29,7 @@ void View::reshape(int width, int height)
 
 void View::display(const Math::Matrix4f *const i_transformationMatrix, const std::list<std::shared_ptr<Geometry::IShape>>& i_list)
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (auto it = i_list.begin(); it != i_list.end(); it++)
 		render(it->get(), i_transformationMatrix);
@@ -56,6 +56,8 @@ void View::startInit(int &i_argc, char **i_argv)
 		std::cerr << "Unable to initialize GLEW ...exiting" << std::endl;
 		exit(EXIT_FAILURE);
 	};
+
+	glEnable(GL_DEPTH_TEST);
 
 	sh_program.init("shader.vert", "shader.frag");
 
