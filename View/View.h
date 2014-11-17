@@ -8,7 +8,7 @@
 
 namespace Math
 {
-	class BaseMatrix;
+	class Matrix4f;
 }
 
 namespace Geometry
@@ -24,7 +24,7 @@ public:
 
 	void postRedisplay();
 	void reshape(int width, int height);
-	void display(const Math::BaseMatrix *const i_transformationMatrix, const std::list<std::shared_ptr<Geometry::IShape>>& i_list);
+	void display(const Math::Matrix4f *const i_transformationMatrix, const std::list<std::shared_ptr<Geometry::IShape>>& i_list);
 	void startInit(int &i_argc, char **i_argv);
 	void finishInit();
 
@@ -37,7 +37,7 @@ public:
 	void setKeySpecialCallback(void(*callback)(int, int, int));
 
 private:
-	void render(Geometry::IShape *i_shape, const Math::BaseMatrix *const p_transformationMatrix);
+	void render(Geometry::IShape *i_shape, const Math::Matrix4f *const p_transformationMatrix);
 
 	ShaderProgram sh_program;
 	GLuint VBO;

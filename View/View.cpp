@@ -27,7 +27,7 @@ void View::reshape(int width, int height)
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 }
 
-void View::display(const Math::BaseMatrix *const i_transformationMatrix, const std::list<std::shared_ptr<Geometry::IShape>>& i_list)
+void View::display(const Math::Matrix4f *const i_transformationMatrix, const std::list<std::shared_ptr<Geometry::IShape>>& i_list)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -106,7 +106,7 @@ void View::setKeySpecialCallback(void(*callback)(int, int, int))
 	glutSpecialFunc(callback);
 }
 
-void View::render(Geometry::IShape *i_shape, const Math::BaseMatrix *const p_transformationMatrix)
+void View::render(Geometry::IShape *i_shape, const Math::Matrix4f *const p_transformationMatrix)
 {
 	if (!i_shape)
 		throw std::runtime_error("Exceptional case.");

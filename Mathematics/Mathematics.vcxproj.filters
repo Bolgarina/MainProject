@@ -24,48 +24,18 @@
     <ClInclude Include="DllApi.h">
       <Filter>LibSettings</Filter>
     </ClInclude>
-    <ClInclude Include="BaseMatrix.h">
+    <ClInclude Include="Vector4f.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OrthoMatrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RotationMatrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScaleMatrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TranslationMatrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrustumProjectionMatrix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AsymFrustumProjectionMatrix.h">
+    <ClInclude Include="Matrix4f.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseMatrix.cpp">
+    <ClCompile Include="Vector4f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OrthoMatrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RotationMatrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ScaleMatrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TranslationMatrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrustumProjectionMatrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AsymFrustumProjectionMatrix.cpp">
+    <ClCompile Include="Matrix4f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

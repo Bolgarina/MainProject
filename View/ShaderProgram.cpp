@@ -115,9 +115,9 @@ void ShaderProgram::setUniformVector(const GLint &i_location, const std::vector<
 	// The second parameter indicates the number of vectors we are updating.
 }
 
-void ShaderProgram::setUniformMatrix(const GLint &i_location, const Math::BaseMatrix &i_transformationMatrix)
+void ShaderProgram::setUniformMatrix(const GLint &i_location, const Math::Matrix4f &i_transformationMatrix)
 {
-	glUniformMatrix4fv(i_location, 1, GL_TRUE, &i_transformationMatrix.get_matrix()[0]);
+	glUniformMatrix4fv(i_location, 1, GL_TRUE, &i_transformationMatrix.get()[0]);
 	// The first parameter is the location of the uniform variable (retrieved after shader compilation using glGetUniformLocation()).
 	// The second parameter indicates the number of matrices we are updating.
 	// The third parameter indicates whether the matrix is supplied in row-major or column-major order. 

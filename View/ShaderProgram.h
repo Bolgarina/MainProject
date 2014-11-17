@@ -6,7 +6,7 @@
 
 #include <string>
 #include <vector>
-#include <Mathematics/BaseMatrix.h>
+#include <Mathematics/Matrix4f.h>
 
 class VIEW_API ShaderProgram
 {
@@ -26,7 +26,7 @@ public:
 
 	// Load data into uniform shader variables
 	void setUniformVector(const GLint &i_location, const std::vector<float> &i_vector);
-	void setUniformMatrix(const GLint &i_location, const Math::BaseMatrix &i_transformationMatrix);
+	void setUniformMatrix(const GLint &i_location, const Math::Matrix4f &i_transformationMatrix);
 
 private:
 	GLuint program_id;

@@ -2,7 +2,7 @@
 
 #include "./DllApi.h"
 #include <Controller/ShapesReader.h>
-#include <Mathematics/BaseMatrix.h>
+#include <Mathematics/Matrix4f.h>
 
 class MODEL_API Model
 {
@@ -11,11 +11,11 @@ public:
 	~Model();
 
 	const ShapesReader::ShList& getData() const;
-	void addTransformation(const Math::BaseMatrix& i_transform);
-	const Math::BaseMatrix& getTransformationMatrix() const;
+	void addTransformation(const Math::Matrix4f& i_transform);
+	const Math::Matrix4f& getTransformationMatrix() const;
 
 private:
-	Math::BaseMatrix transformationMatrix;
+	Math::Matrix4f transformationMatrix;
 #pragma warning (push)
 #pragma warning(disable:4251)
 	ShapesReader::ShList shapes;

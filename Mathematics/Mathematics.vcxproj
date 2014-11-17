@@ -82,24 +82,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BaseMatrix.h" />
+    <ClInclude Include="Matrix4f.h" />
     <ClInclude Include="DllApi.h" />
-    <ClInclude Include="FrustumProjectionMatrix.h" />
-    <ClInclude Include="AsymFrustumProjectionMatrix.h" />
-    <ClInclude Include="OrthoMatrix.h" />
-    <ClInclude Include="RotationMatrix.h" />
-    <ClInclude Include="ScaleMatrix.h" />
-    <ClInclude Include="TranslationMatrix.h" />
+    <ClInclude Include="Vector4f.h" />
     <ClInclude Include="_Link.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AsymFrustumProjectionMatrix.cpp" />
-    <ClCompile Include="BaseMatrix.cpp" />
-    <ClCompile Include="FrustumProjectionMatrix.cpp" />
-    <ClCompile Include="OrthoMatrix.cpp" />
-    <ClCompile Include="RotationMatrix.cpp" />
-    <ClCompile Include="ScaleMatrix.cpp" />
-    <ClCompile Include="TranslationMatrix.cpp" />
+    <ClCompile Include="Matrix4f.cpp" />
+    <ClCompile Include="Vector4f.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

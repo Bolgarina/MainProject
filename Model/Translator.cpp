@@ -1,5 +1,5 @@
 #include "./Translator.h"
-#include <Mathematics/TranslationMatrix.h>
+#include <Mathematics/Matrix4f.h>
 #include "./Point.h"
 #include "./Triangle.h"
 #include "./Rectangle.h"
@@ -10,17 +10,16 @@ Translator::Translator(const float &i_dx, const float &i_dy, const float &i_dz) 
 
 void Translator::visit(Geometry::Triangle *i_triangle)
 {
-	Math::TranslationMatrix T(dx, dy, dz);
+	Math::Matrix4f T = Math::Matrix4f::createTranslation(dx, dy, dz);
 
 	std::vector<Geometry::Point> triangle = i_triangle->getVertices();
 	for (size_t i = 0; triangle.size(); i++)
 	{
 		// get homogeneous coordinate from 3-space
-		std::vector<float> hc(4, 1.0f);
-		hc[0] = triangle[i].x;   hc[1] = triangle[i].y;   hc[2] = triangle[i].z;
+		Math::Vector4f hc(triangle[i].x, triangle[i].y, triangle[i].z, 1.0f);
 
 		// Multiply with T (translation matrix)
-		std::vector<float> new_hc = T * hc;
+		Math::Vector4f new_hc = T * hc;
 
 		// update 3-space coordinate
 		i_triangle->setVertex(i, Geometry::Point(new_hc[0], new_hc[1], new_hc[2]));
@@ -31,21 +30,18 @@ void Translator::visit(Geometry::Triangle *i_triangle)
 
 void Translator::visit(Geometry::Rectangle *i_rectangle)
 {
-	Math::TranslationMatrix T(dx, dy, dz);
+	Math::Matrix4f T = Math::Matrix4f::createTranslation(dx, dy, dz);
 
 	Geometry::Point lbv = i_rectangle->getLeftBottomVertex();
 	Geometry::Point rtv = i_rectangle->getRightTopVertex();
 	
 	// get homogeneous coordinate from 3-space
-	std::vector<float> hc_lbv(4, 1.0f);
-	std::vector<float> hc_rtv(4, 1.0f);
-
-	hc_lbv[0] = lbv.x;   hc_lbv[1] = lbv.y;   hc_lbv[2] = lbv.z;
-	hc_rtv[0] = rtv.x;   hc_rtv[1] = rtv.y;   hc_rtv[2] = rtv.z;
+	Math::Vector4f hc_lbv(lbv.x, lbv.y, lbv.z, 1.0f);
+	Math::Vector4f hc_rtv(rtv.x, rtv.y, rtv.z, 1.0f);
 
 	// Multiply with T (translation matrix)
-	std::vector<float> new_hc_lbv = T * hc_lbv;
-	std::vector<float> new_hc_rtv = T * hc_rtv;
+	Math::Vector4f new_hc_lbv = T * hc_lbv;
+	Math::Vector4f new_hc_rtv = T * hc_rtv;
 
 	// update 3-space coordinate
 	i_rectangle->setLeftBottomVertex(Geometry::Point(new_hc_lbv[0], new_hc_lbv[1], new_hc_lbv[2]));

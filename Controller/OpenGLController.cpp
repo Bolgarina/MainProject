@@ -3,9 +3,7 @@
 
 #include "./OpenGLController.h"
 
-#include <Mathematics/ScaleMatrix.h>
-#include <Mathematics/RotationMatrix.h>
-#include <Mathematics/TranslationMatrix.h>
+#include <Mathematics/Matrix4f.h>
 
 #include <Model/Model.h>
 #include <View/View.h>
@@ -129,14 +127,14 @@ void OpenGLController::mouseWheel(int wheel, int direction, int x, int y)
 	{
 	case 1:
 	{
-		Math::ScaleMatrix scaleMatrix(2.0f, 2.0f, 2.0f);
+		Math::Matrix4f scaleMatrix = Math::Matrix4f::createScale(2.0f, 2.0f, 2.0f);
 		model->addTransformation(scaleMatrix);
 		view->postRedisplay();
 		break;
 	}
 	case -1:
 	{
-		Math::ScaleMatrix scaleMatrix(0.5f, 0.5f, 0.5f);
+		Math::Matrix4f scaleMatrix = Math::Matrix4f::createScale(0.5f, 0.5f, 0.5f);
 		model->addTransformation(scaleMatrix);
 		view->postRedisplay();
 		break;
@@ -159,13 +157,13 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 	case 'Y':
 		if (RIGHT_BUTTON_down) // clockwise
 		{
-			Math::RotationMatrix rotateMatrix((float)(5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
+			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
 			model->addTransformation(rotateMatrix);
 			view->postRedisplay();
 		}
 		else if (LEFT_BUTTON_down) // counterclockwise
 		{
-			Math::RotationMatrix rotateMatrix((float)(-5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
+			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(-5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
 			model->addTransformation(rotateMatrix);
 			view->postRedisplay();
 		}
@@ -174,13 +172,13 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 	case 'X':
 		if (RIGHT_BUTTON_down) // clockwise
 		{
-			Math::RotationMatrix rotateMatrix((float)(5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
+			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
 			model->addTransformation(rotateMatrix);
 			view->postRedisplay();
 		}
 		else if (LEFT_BUTTON_down) // counterclockwise
 		{
-			Math::RotationMatrix rotateMatrix((float)(-5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
+			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(-5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
 			model->addTransformation(rotateMatrix);
 			view->postRedisplay();
 		}
@@ -189,13 +187,13 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 	case 'Z':
 		if (RIGHT_BUTTON_down) // clockwise
 		{
-			Math::RotationMatrix rotateMatrix((float)(5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
+			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
 			model->addTransformation(rotateMatrix);
 			view->postRedisplay();
 		}
 		else if (LEFT_BUTTON_down) // counterclockwise
 		{
-			Math::RotationMatrix rotateMatrix((float)(-5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
+			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(-5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
 			model->addTransformation(rotateMatrix);
 			view->postRedisplay();
 		}
@@ -211,28 +209,28 @@ void OpenGLController::keySpecial(int key, int x, int y)
 	{
 	case GLUT_KEY_LEFT:
 	{
-		Math::TranslationMatrix translateMatrix(-0.1f, 0.0f, 0.0f);
+		Math::Matrix4f translateMatrix = Math::Matrix4f::createTranslation(-0.1f, 0.0f, 0.0f);
 		model->addTransformation(translateMatrix);
 		view->postRedisplay();
 		break;
 	}
 	case GLUT_KEY_DOWN:
 	{
-		Math::TranslationMatrix translateMatrix(0.0f, -0.1f, 0.0f);
+		Math::Matrix4f translateMatrix = Math::Matrix4f::createTranslation(0.0f, -0.1f, 0.0f);
 		model->addTransformation(translateMatrix);
 		view->postRedisplay();
 		break;
 	}
 	case GLUT_KEY_RIGHT:
 	{
-		Math::TranslationMatrix translateMatrix(0.1f, 0.0f, 0.0f);
+		Math::Matrix4f translateMatrix = Math::Matrix4f::createTranslation(0.1f, 0.0f, 0.0f);
 		model->addTransformation(translateMatrix);
 		view->postRedisplay();
 		break;
 	}
 	case GLUT_KEY_UP:
 	{
-		Math::TranslationMatrix translateMatrix(0.0f, 0.1f, 0.0f);
+		Math::Matrix4f translateMatrix = Math::Matrix4f::createTranslation(0.0f, 0.1f, 0.0f);
 		model->addTransformation(translateMatrix);
 		view->postRedisplay();
 		break;
