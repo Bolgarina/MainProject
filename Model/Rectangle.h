@@ -4,6 +4,7 @@
 
 #include "./IShape.h"
 #include "./Point.h"
+#include "./Color.h"
 
 #include <iostream>
 #include <string>
@@ -17,7 +18,7 @@ namespace Geometry
 	{
 	public:
 		Rectangle();
-		Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex);
+		Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex, Color i_color = Color());
 		explicit Rectangle(const Rectangle &i_rect);
 		~Rectangle();
 
@@ -28,6 +29,7 @@ namespace Geometry
 		const Point &getRightTopVertex() const;
 		std::vector<Point> getVertices() const;
 		const Point getCentroid() const;
+		std::vector<float> getColor() const;
 
 		void setLeftBottomVertex(Point i_pt);
 		void setRightTopVertex(Point i_pt);
@@ -43,5 +45,6 @@ namespace Geometry
 #pragma warning(disable:4251)
 		std::vector<Point> vertices;
 #pragma warning (pop)
+		Color color;
 	};
 }

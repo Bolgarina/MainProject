@@ -18,8 +18,8 @@ namespace Geometry
 	{
 	}
 
-	bool Point::operator==(const Point &pt) const
+	bool Point::operator==(const Point &i_point) const
 	{
-		return this->x == pt.x && this->y == pt.y && this->z == pt.z;
+		return (this->x == i_point.x) && (this->y == i_point.y) && (this->z == i_point.z);
 	}
 }

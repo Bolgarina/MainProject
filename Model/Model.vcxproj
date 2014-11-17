@@ -84,6 +84,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Color.h" />
     <ClInclude Include="DllApi.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="IShape.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="_Link.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Linking.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Point.cpp" />

@@ -124,8 +124,8 @@ void View::render(Geometry::IShape *i_shape, const Math::BaseMatrix *const p_tra
 		sh_program.bind();
 		sh_program.setUniformMatrix(u_transformationMatrix, *p_transformationMatrix);
 
-		std::vector<float> white(4, 1.0f);
-		sh_program.setUniformVector(u_color, white);
+		std::vector<float> color = i_shape->getColor();
+		sh_program.setUniformVector(u_color, color);
 
 		glEnableVertexAttribArray(a_coord); // lets to use a_coord
 		glVertexAttribPointer(a_coord, 3, GL_FLOAT, GL_FALSE, 0, 0); // set access parameters of a_coord to VBO

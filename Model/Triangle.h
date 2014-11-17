@@ -4,6 +4,7 @@
 		  
 #include "./IShape.h"
 #include "./Point.h"
+#include "./Color.h"
 
 #include <iostream>
 #include <string>
@@ -16,7 +17,7 @@ namespace Geometry
 	{
 	public:
 		Triangle();
-		Triangle(Point i_vertex1, Point i_vertex2, Point i_vertex3);
+		Triangle(Point i_vertex1, Point i_vertex2, Point i_vertex3, Color i_color = Color());
 		explicit Triangle(const Triangle &i_triangle);
 		~Triangle();
 
@@ -25,6 +26,7 @@ namespace Geometry
 
 		std::vector<Point> getVertices() const;
 		const Point getCentroid() const;
+		std::vector<float> getColor() const;
 
 		void setVertex(size_t i_index, Point i_pt);
 
@@ -33,5 +35,6 @@ namespace Geometry
 #pragma warning(disable:4251)
 		std::vector<Point> vertices;
 #pragma warning (pop)
+		Color color;
 	};
 }

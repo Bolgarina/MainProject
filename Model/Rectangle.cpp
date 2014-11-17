@@ -3,14 +3,15 @@
 
 namespace Geometry
 {
-	Rectangle::Rectangle()
+	Rectangle::Rectangle() : color()
 	{
 		vertices.reserve(2);
 		vertices.push_back(Point());
 		vertices.push_back(Point(1.0f, 1.0f, 0.0f));
 	}
 
-	Rectangle::Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex)
+	Rectangle::Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex, Color i_color) :
+		color(i_color)
 	{
 		//if (width == 0 || height == 0)
 		//	throw std::logic_error("Width and height should be greater than 0.");
@@ -24,6 +25,8 @@ namespace Geometry
 		vertices.reserve(2);
 		vertices.push_back(i_rect.getLeftBottomVertex());
 		vertices.push_back(i_rect.getRightTopVertex());
+
+		color = i_rect.color;
 	}
 
 	Rectangle::~Rectangle()
@@ -76,6 +79,18 @@ namespace Geometry
 		return Point((getLeftBottomVertex().x + getRightTopVertex().x) / 2.0f,
 			(getLeftBottomVertex().y + getRightTopVertex().y) / 2.0f,
 			(getLeftBottomVertex().z + getRightTopVertex().z) / 2.0f);
+	}
+
+	std::vector<float> Rectangle::getColor() const
+	{
+		std::vector<float> vColor;
+
+		vColor.push_back(color.r);
+		vColor.push_back(color.g);
+		vColor.push_back(color.b);
+		vColor.push_back(color.alpha);
+
+		return vColor;
 	}
 
 	void Rectangle::setLeftBottomVertex(Point i_pt)

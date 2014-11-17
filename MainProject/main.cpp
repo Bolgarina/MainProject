@@ -24,7 +24,8 @@ int main(int argc, char **argv)
 	catch (const std::runtime_error& e)
 	{
 		std::cerr << "Runtime error: " << e.what() << std::endl;
-		exit(EXIT_FAILURE);
+		return 1;
+		//exit(EXIT_FAILURE);
 	}
 
 	controller->init(argc, argv);
