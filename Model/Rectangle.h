@@ -25,8 +25,8 @@ namespace Geometry
 		static std::string name();
 		void accept(IVisitor* i_view);
 
-		const Point &getLeftBottomVertex() const;
-		const Point &getRightTopVertex() const;
+		const Point& getLeftBottomVertex() const;
+		const Point& getRightTopVertex() const;
 		std::vector<Point> getVertices() const;
 		const Point getCentroid() const;
 		std::vector<float> getColor() const;

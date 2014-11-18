@@ -43,12 +43,12 @@ namespace Geometry
 		return "triangle";
 	}
 
-	void Triangle::accept(IVisitor *i_view)
+	void Triangle::accept(IVisitor *i_visitor)
 	{
-		if (!i_view)
+		if (!i_visitor)
 			throw std::runtime_error("Exceptional case.");
 
-		i_view->visit(this);
+		i_visitor->visit(this);
 	}
 
 	std::vector<Point> Triangle::getVertices() const
@@ -78,7 +78,7 @@ namespace Geometry
 	void Triangle::setVertex(size_t i_index, Point i_pt)
 	{
 		if ((i_index > 2) || (i_index < 0))
-			throw std::logic_error("Invalid argument (out of range).");
+			throw std::invalid_argument("Invalid argument (out of range).");
 
 		vertices[i_index] = i_pt;
 	}

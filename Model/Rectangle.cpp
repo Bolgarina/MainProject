@@ -13,20 +13,21 @@ namespace Geometry
 	Rectangle::Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex, Color i_color) :
 		color(i_color)
 	{
-		//if (width == 0 || height == 0)
-		//	throw std::logic_error("Width and height should be greater than 0.");
+		if ((i_left_bottom_vertex.x == i_right_top_vertex.x && i_left_bottom_vertex.y == i_right_top_vertex.y) || 
+			(i_left_bottom_vertex.x == i_right_top_vertex.x && i_left_bottom_vertex.z == i_right_top_vertex.z) ||
+			(i_left_bottom_vertex.y == i_right_top_vertex.y && i_left_bottom_vertex.z == i_right_top_vertex.z))
+			throw std::logic_error("Degenerate rectangle (line/point).");
+
 		vertices.reserve(2);
 		vertices.push_back(i_left_bottom_vertex);
 		vertices.push_back(i_right_top_vertex);
 	}
 
-	Rectangle::Rectangle(const Rectangle &i_rect)// : 
+	Rectangle::Rectangle(const Rectangle &i_rect) : color(i_rect.color)
 	{
 		vertices.reserve(2);
 		vertices.push_back(i_rect.getLeftBottomVertex());
 		vertices.push_back(i_rect.getRightTopVertex());
-
-		color = i_rect.color;
 	}
 
 	Rectangle::~Rectangle()
@@ -38,20 +39,20 @@ namespace Geometry
 		return "rectangle";
 	}
 
-	void Rectangle::accept(IVisitor *i_view)
+	void Rectangle::accept(IVisitor *i_visitor)
 	{
-		if (!i_view)
+		if (!i_visitor)
 			throw std::runtime_error("Exceptional case.");
 
-		i_view->visit(this);
+		i_visitor->visit(this);
 	}
 
-	const Point &Rectangle::getLeftBottomVertex() const
+	const Point& Rectangle::getLeftBottomVertex() const
 	{
 		return vertices[ELEFT_BOTTOM];
 	}
 
-	const Point &Rectangle::getRightTopVertex() const
+	const Point& Rectangle::getRightTopVertex() const
 	{
 		return vertices[ERIGHT_TOP];
 	}
