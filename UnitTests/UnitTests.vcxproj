@@ -89,6 +89,7 @@
     <ClCompile Include="PointTests.cpp" />
     <ClCompile Include="RectangleTests.cpp" />
     <ClCompile Include="TriangleTests.cpp" />
+    <ClCompile Include="Vector4fTests.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

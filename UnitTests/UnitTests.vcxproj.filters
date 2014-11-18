@@ -19,6 +19,9 @@
     <Filter Include="Source Files\ModelTests">
       <UniqueIdentifier>{ab87dbf4-b90c-4183-a4d5-1e9610bdd2e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\MathTests">
+      <UniqueIdentifier>{25079f25-73f1-4345-b833-174daf954d18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Linking.cpp">
@@ -35,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="ColorTests.cpp">
       <Filter>Source Files\ModelTests</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4fTests.cpp">
+      <Filter>Source Files\MathTests</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

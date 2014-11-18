@@ -100,7 +100,7 @@ namespace Math
 	Vector4f Vector4f::operator/(const float &rhs)
 	{
 		if (!rhs)
-			throw std::logic_error("Invalid argument (division by 0).");
+			throw std::invalid_argument("Invalid argument (division by 0).");
 
 		Vector4f result;
 		for (size_t i = 0; i < VECTOR_SIZE; i++)
@@ -122,16 +122,16 @@ namespace Math
 	// Access to element                                                                                                                                                                                             
 	float& Vector4f::operator[](const size_t &index)
 	{
-		if ((index < 0) && (index >= VECTOR_SIZE))
-			throw std::logic_error("Invalid argument (out of range).");
+		if ((index < 0) || (index >= VECTOR_SIZE))
+			throw std::invalid_argument("Invalid argument (out of range).");
 
 		return this->vect[index];
 	}
 
 	const float& Vector4f::operator[](const size_t &index) const
 	{
-		if ((index < 0) && (index >= VECTOR_SIZE))
-			throw std::logic_error("Invalid argument (out of range).");
+		if ((index < 0) || (index >= VECTOR_SIZE))
+			throw std::invalid_argument("Invalid argument (out of range).");
 
 		return this->vect[index];
 	}
