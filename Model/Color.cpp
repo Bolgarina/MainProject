@@ -22,6 +22,6 @@ namespace Geometry
 
 	bool Color::operator==(const Color &i_color) const
 	{
-		return (this->r == i_color.r) && (this->g == i_color.g) && (this->b == i_color.b) && (this->alpha && i_color.alpha);
+		return (this->r == i_color.r) && (this->g == i_color.g) && (this->b == i_color.b) && (this->alpha == i_color.alpha);
 	}
 }

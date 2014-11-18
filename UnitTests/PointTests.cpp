@@ -12,7 +12,7 @@ namespace UnitTests
 	{
 	public:
 
-		TEST_METHOD(ShouldBeEqual)
+		TEST_METHOD(ShouldBeEqualPoints)
 		{
 			Assert::IsTrue(Point(23.0f, 42.0f, 10.0f) == Point(23.0f, 42.0f, 10.0f));
 			Assert::IsFalse(Point(15.0f, 42.0f, 10.0f) == Point(-23.0f, 5.0f, 8.0f)); // all are different
