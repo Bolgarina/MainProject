@@ -42,5 +42,8 @@
     <ClCompile Include="Vector4fTests.cpp">
       <Filter>Source Files\MathTests</Filter>
     </ClCompile>
+    <ClCompile Include="Matrix4fTests.cpp">
+      <Filter>Source Files\MathTests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

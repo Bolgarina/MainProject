@@ -86,6 +86,7 @@
   <ItemGroup>
     <ClCompile Include="ColorTests.cpp" />
     <ClCompile Include="Linking.cpp" />
+    <ClCompile Include="Matrix4fTests.cpp" />
     <ClCompile Include="PointTests.cpp" />
     <ClCompile Include="RectangleTests.cpp" />
     <ClCompile Include="TriangleTests.cpp" />

@@ -38,10 +38,7 @@ namespace UnitTests
 			Vector4f vect1(1.0f, 2.0f, 3.0f, 4.0f);
 			Vector4f vect2(vect1);
 
-			Assert::AreEqual(vect2.get()[0], vect1.get()[0]);
-			Assert::AreEqual(vect2.get()[1], vect1.get()[1]);
-			Assert::AreEqual(vect2.get()[2], vect1.get()[2]);
-			Assert::AreEqual(vect2.get()[3], vect1.get()[3]);
+			Assert::IsTrue(vect2 == vect1);
 		}
 
 		TEST_METHOD(ShouldAssignVector)
@@ -50,10 +47,7 @@ namespace UnitTests
 			Vector4f vect2;
 			vect2 = vect1;
 
-			Assert::AreEqual(vect2.get()[0], vect1.get()[0]);
-			Assert::AreEqual(vect2.get()[1], vect1.get()[1]);
-			Assert::AreEqual(vect2.get()[2], vect1.get()[2]);
-			Assert::AreEqual(vect2.get()[3], vect1.get()[3]);
+			Assert::IsTrue(vect2 == vect1);
 		}
 
 		TEST_METHOD(ShouldAddVectors)
@@ -62,10 +56,10 @@ namespace UnitTests
 			Vector4f vect2(5.0f, 6.0f, 7.0f, 8.0f);
 			Vector4f vect3 = vect1 + vect2;
 
-			Assert::AreEqual(vect3.get()[0], vect1.get()[0] + vect2.get()[0]);
-			Assert::AreEqual(vect3.get()[1], vect1.get()[1] + vect2.get()[1]);
-			Assert::AreEqual(vect3.get()[2], vect1.get()[2] + vect2.get()[2]);
-			Assert::AreEqual(vect3.get()[3], vect1.get()[3] + vect2.get()[3]);
+			Assert::AreEqual(vect3[0], vect1[0] + vect2[0]);
+			Assert::AreEqual(vect3[1], vect1[1] + vect2[1]);
+			Assert::AreEqual(vect3[2], vect1[2] + vect2[2]);
+			Assert::AreEqual(vect3[3], vect1[3] + vect2[3]);
 		}
 
 		TEST_METHOD(ShouldAddVectorToThis)
@@ -75,10 +69,10 @@ namespace UnitTests
 			Vector4f vect3(vect1); // store this vector in vect3
 			vect1 += vect2;
 
-			Assert::AreEqual(vect1.get()[0], vect3.get()[0] + vect2.get()[0]);
-			Assert::AreEqual(vect1.get()[1], vect3.get()[1] + vect2.get()[1]);
-			Assert::AreEqual(vect1.get()[2], vect3.get()[2] + vect2.get()[2]);
-			Assert::AreEqual(vect1.get()[3], vect3.get()[3] + vect2.get()[3]);
+			Assert::AreEqual(vect1[0], vect3[0] + vect2[0]);
+			Assert::AreEqual(vect1[1], vect3[1] + vect2[1]);
+			Assert::AreEqual(vect1[2], vect3[2] + vect2[2]);
+			Assert::AreEqual(vect1[3], vect3[3] + vect2[3]);
 		}
 
 		TEST_METHOD(ShouldSubVectors)
@@ -87,10 +81,10 @@ namespace UnitTests
 			Vector4f vect2(5.0f, 6.0f, 7.0f, 8.0f);
 			Vector4f vect3 = vect1 - vect2;
 
-			Assert::AreEqual(vect3.get()[0], vect1.get()[0] - vect2.get()[0]);
-			Assert::AreEqual(vect3.get()[1], vect1.get()[1] - vect2.get()[1]);
-			Assert::AreEqual(vect3.get()[2], vect1.get()[2] - vect2.get()[2]);
-			Assert::AreEqual(vect3.get()[3], vect1.get()[3] - vect2.get()[3]);
+			Assert::AreEqual(vect3[0], vect1[0] - vect2[0]);
+			Assert::AreEqual(vect3[1], vect1[1] - vect2[1]);
+			Assert::AreEqual(vect3[2], vect1[2] - vect2[2]);
+			Assert::AreEqual(vect3[3], vect1[3] - vect2[3]);
 		}
 
 		TEST_METHOD(ShouldSubVectorFromThis)
@@ -100,59 +94,34 @@ namespace UnitTests
 			Vector4f vect3(vect1); // store this vector in vect3
 			vect1 -= vect2;
 
-			Assert::AreEqual(vect1.get()[0], vect3.get()[0] - vect2.get()[0]);
-			Assert::AreEqual(vect1.get()[1], vect3.get()[1] - vect2.get()[1]);
-			Assert::AreEqual(vect1.get()[2], vect3.get()[2] - vect2.get()[2]);
-			Assert::AreEqual(vect1.get()[3], vect3.get()[3] - vect2.get()[3]);
-		}
-
-		TEST_METHOD(ShouldMultVectors)
-		{
-			Vector4f vect1(1.0f, 2.0f, 3.0f, 4.0f);
-			Vector4f vect2(5.0f, 6.0f, 7.0f, 8.0f);
-			Vector4f vect3 = vect1 - vect2;
-
-			Assert::AreEqual(vect3.get()[0], vect1.get()[0] - vect2.get()[0]);
-			Assert::AreEqual(vect3.get()[1], vect1.get()[1] - vect2.get()[1]);
-			Assert::AreEqual(vect3.get()[2], vect1.get()[2] - vect2.get()[2]);
-			Assert::AreEqual(vect3.get()[3], vect1.get()[3] - vect2.get()[3]);
-		}
-
-		TEST_METHOD(ShouldMultVectorWithThis)
-		{
-			Vector4f vect1(1.0f, 2.0f, 3.0f, 4.0f);
-			Vector4f vect2(5.0f, 6.0f, 7.0f, 8.0f);
-			Vector4f vect3(vect1); // store this vector in vect3
-			vect1 *= vect2;
-
-			Assert::AreEqual(vect1.get()[0], vect3.get()[0] * vect2.get()[0]);
-			Assert::AreEqual(vect1.get()[1], vect3.get()[1] * vect2.get()[1]);
-			Assert::AreEqual(vect1.get()[2], vect3.get()[2] * vect2.get()[2]);
-			Assert::AreEqual(vect1.get()[3], vect3.get()[3] * vect2.get()[3]);
+			Assert::AreEqual(vect1[0], vect3[0] - vect2[0]);
+			Assert::AreEqual(vect1[1], vect3[1] - vect2[1]);
+			Assert::AreEqual(vect1[2], vect3[2] - vect2[2]);
+			Assert::AreEqual(vect1[3], vect3[3] - vect2[3]);
 		}
 
 		TEST_METHOD(ShouldMultVectorWithScalar)
 		{
 			Vector4f vect1(1.0f, 2.0f, 3.0f, 4.0f);
 			float k = 2.0f;
-			Vector4f vect2 = vect1 * k;
+			Vector4f vect2(vect1 * k);
 
-			Assert::AreEqual(vect2.get()[0], vect1.get()[0] * k);
-			Assert::AreEqual(vect2.get()[1], vect1.get()[1] * k);
-			Assert::AreEqual(vect2.get()[2], vect1.get()[2] * k);
-			Assert::AreEqual(vect2.get()[3], vect1.get()[3] * k);
+			Assert::AreEqual(vect2[0], vect1[0] * k);
+			Assert::AreEqual(vect2[1], vect1[1] * k);
+			Assert::AreEqual(vect2[2], vect1[2] * k);
+			Assert::AreEqual(vect2[3], vect1[3] * k);
 		}
 
 		TEST_METHOD(ShouldDivVectorByScalar)
 		{
 			Vector4f vect1(1.0f, 2.0f, 3.0f, 4.0f);
 			float k = 2.0f;
-			Vector4f vect2 = vect1 / k;
+			Vector4f vect2(vect1 / k);
 
-			Assert::AreEqual(vect2.get()[0], vect1.get()[0] / k);
-			Assert::AreEqual(vect2.get()[1], vect1.get()[1] / k);
-			Assert::AreEqual(vect2.get()[2], vect1.get()[2] / k);
-			Assert::AreEqual(vect2.get()[3], vect1.get()[3] / k);
+			Assert::AreEqual(vect2[0], vect1[0] / k);
+			Assert::AreEqual(vect2[1], vect1[1] / k);
+			Assert::AreEqual(vect2[2], vect1[2] / k);
+			Assert::AreEqual(vect2[3], vect1[3] / k);
 		}
 
 		TEST_METHOD(ShouldThrowWhen_DivVectorBy0)
@@ -160,7 +129,7 @@ namespace UnitTests
 			auto func_div_by_0 = []()
 			{
 				Vector4f vect1(1.0f, 2.0f, 3.0f, 4.0f);
-				Vector4f vect2 = vect1 / 0.0f;
+				Vector4f vect2(vect1 / 0.0f);
 			};
 
 			Assert::ExpectException<std::invalid_argument>(func_div_by_0);

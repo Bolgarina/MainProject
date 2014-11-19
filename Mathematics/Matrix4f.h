@@ -12,6 +12,7 @@ namespace Math
 	{
 	public:
 		Matrix4f();
+		Matrix4f(const Vector4f vect1, const Vector4f vect2, const Vector4f vect3, const Vector4f vect4);
 		Matrix4f(const Matrix4f &rhs);
 		~Matrix4f();
 
@@ -33,6 +34,10 @@ namespace Math
 
 		// Matrix/vector operations                                                                                                                                                                                                     
 		Vector4f operator*(const Vector4f &rhs);
+
+		// Bool operations
+		const bool operator==(const Matrix4f &rhs);
+
 		std::vector<float> get() const;
 
 		// Access the individual elements                                                                                                                                                                                               

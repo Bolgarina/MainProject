@@ -70,23 +70,6 @@ namespace Math
 		return *this;
 	}
 
-	Vector4f Vector4f::operator*(const Vector4f &rhs)
-	{
-		Vector4f result;
-		for (size_t i = 0; i < VECTOR_SIZE; i++)
-			result[i] = this->vect[i] * rhs[i];
-
-		return result;
-	}
-
-	Vector4f& Vector4f::operator*=(const Vector4f &rhs)
-	{
-		for (size_t i = 0; i < VECTOR_SIZE; i++)
-			this->vect[i] *= rhs[i];
-
-		return *this;
-	}
-
 	// Vector/scalar operations
 	Vector4f Vector4f::operator*(const float &rhs)
 	{
@@ -107,6 +90,11 @@ namespace Math
 			result[i] = this->vect[i] / rhs;
 
 		return result;
+	}
+
+	const bool Vector4f::operator==(const Vector4f &rhs)
+	{
+		return this->vect[0] == rhs[0] && this->vect[1] == rhs[1] && this->vect[2] == rhs[2] && this->vect[3] == rhs[3];
 	}
 
 	const std::vector<float> &Vector4f::get() const

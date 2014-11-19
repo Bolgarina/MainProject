@@ -8,6 +8,15 @@ namespace Math
 	{
 	}
 
+	Matrix4f::Matrix4f(const Vector4f vect1, const Vector4f vect2, const Vector4f vect3, const Vector4f vect4)
+	{
+		matrix.reserve(MATRIX_SIZE);
+		matrix.push_back(vect1);
+		matrix.push_back(vect2);
+		matrix.push_back(vect3);
+		matrix.push_back(vect4);
+	}
+
 	// Copy Constructor                                                                                                                                                           
 	Matrix4f::Matrix4f(const Matrix4f& rhs)
 	{
@@ -114,7 +123,7 @@ namespace Math
 	Matrix4f Matrix4f::operator/(const float &rhs)
 	{
 		if (!rhs)
-			throw std::logic_error("Invalid argument (division by 0).");
+			throw std::invalid_argument("Invalid argument (division by 0).");
 
 		Matrix4f result;
 		for (size_t i = 0; i < MATRIX_SIZE; i++)
@@ -128,10 +137,15 @@ namespace Math
 	{
 		Vector4f result;
 		for (size_t i = 0; i < MATRIX_SIZE; i++)
-			for (size_t j = 0; j < rhs.size(); j++)
-				result[i] = this->matrix[i][j] * rhs[j];
+			for (size_t j = 0; j < MATRIX_SIZE; j++)
+				result[i] += this->matrix[i][j] * rhs[j];
 
 		return result;
+	}
+
+	const bool Matrix4f::operator==(const Matrix4f &rhs)
+	{
+		return this->matrix[0] == rhs[0] && this->matrix[1] == rhs[1] && this->matrix[2] == rhs[2] && this->matrix[3] == rhs[3];
 	}
 
 	std::vector<float> Matrix4f::get() const
@@ -221,6 +235,12 @@ namespace Math
 	// Projection matrices (static)
 	Matrix4f Matrix4f::createOrtho(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
 	{
+		if (right == left || top == bottom || far == near)
+			throw std::invalid_argument("Invalid arguments (left/bottom/near should not be equal to right/top/far respectively).");
+
+		if (far < 0 || near < 0 || far < near)
+			throw std::logic_error("Far and near values must be positive, far value should be greater than near value.");
+
 		Matrix4f matrix;
 		matrix[0][0] = 2.0f / (right - left);
 		matrix[1][1] = 2.0f / (top - bottom);
@@ -236,6 +256,12 @@ namespace Math
 
 	Matrix4f Matrix4f::createPerspective(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
 	{
+		if (right == left || top == bottom || far == near)
+			throw std::invalid_argument("Invalid arguments (left/bottom/near should not be equal to right/top/far respectively).");
+
+		if (far < 0 || near < 0 || far < near)
+			throw std::logic_error("Far and near values must be positive, far value should be greater than near value.");
+
 		Matrix4f matrix;
 		matrix[0][0] = 2.0f * near / (right - left);
 		matrix[1][1] = 2.0f * near / (top - bottom);

@@ -9,6 +9,8 @@ namespace Math
 	class MATHEMATICS_API Vector4f
 	{
 	public:
+		static const size_t VECTOR_SIZE = 4;
+
 		Vector4f();
 		Vector4f(const float arg1, const float arg2, const float arg3, const float arg4);
 		Vector4f(const Vector4f &rhs);
@@ -20,12 +22,13 @@ namespace Math
 		Vector4f& operator+=(const Vector4f &rhs);
 		Vector4f operator-(const Vector4f &rhs);
 		Vector4f& operator-=(const Vector4f &rhs);
-		Vector4f operator*(const Vector4f &rhs);
-		Vector4f& operator*=(const Vector4f &rhs);
 
 		// Vector/scalar operations
 		Vector4f operator*(const float &rhs);
 		Vector4f operator/(const float &rhs);
+
+		// Bool operations
+		const bool operator==(const Vector4f &rhs);
 
 		const std::vector<float> &get() const;
 		const size_t& size() const;
@@ -37,7 +40,6 @@ namespace Math
 	private:
 #pragma warning (push)
 #pragma warning(disable:4251)
-		static const size_t VECTOR_SIZE = 4;
 		std::vector<float> vect;
 #pragma warning (pop)
 	};
