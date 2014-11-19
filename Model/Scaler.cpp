@@ -2,16 +2,14 @@
 #include "./Point.h"
 #include "./Triangle.h"
 #include "./Rectangle.h"
-#include <Mathematics/Matrix4f.h>
 
-Scaler::Scaler(const float &i_sx, const float &i_sy, const float &i_sz) : sx(i_sx), sy(i_sy), sz(i_sz)
+Scaler::Scaler(const float &i_sx, const float &i_sy, const float &i_sz) :
+	S(Math::Matrix4f::createScale(i_sx, i_sy, i_sz))
 {
 }
 
 void Scaler::visit(Geometry::Triangle *i_triangle)
 {
-	Math::Matrix4f S = Math::Matrix4f::createScale(sx, sy, sz);
-
 	// get triangle's centroid
 	Geometry::Point center = i_triangle->getCentroid();
 
@@ -30,14 +28,10 @@ void Scaler::visit(Geometry::Triangle *i_triangle)
 		// update 3-space coordinate
 		i_triangle->setVertex(i, Geometry::Point(new_hc[0], new_hc[1], new_hc[2]));
 	}
-
-	// send signal to views
 }
 
 void Scaler::visit(Geometry::Rectangle *i_rectangle)
 {
-	Math::Matrix4f S = Math::Matrix4f::createScale(sx, sy, sz);
-
 	// get rectangle's centroid
 	Geometry::Point center = i_rectangle->getCentroid();
 
@@ -58,6 +52,4 @@ void Scaler::visit(Geometry::Rectangle *i_rectangle)
 	// update 3-space coordinate
 	i_rectangle->setLeftBottomVertex(Geometry::Point(new_hc_lbv[0], new_hc_lbv[1], new_hc_lbv[2]));
 	i_rectangle->setRightTopVertex(Geometry::Point(new_hc_rtv[0], new_hc_rtv[1], new_hc_rtv[2]));
-
-	// send signal to views
 }

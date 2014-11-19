@@ -3,6 +3,7 @@
 #include "./DllApi.h"
 
 #include "./IVisitor.h"
+#include <Mathematics/Matrix4f.h>
 
 namespace Geometry
 {
@@ -18,7 +19,5 @@ public:
 	void visit(Geometry::Rectangle *i_rectangle);
 
 private:
-	const float sx;
-	const float sy;
-	const float sz;
+	Math::Matrix4f S;
 };

@@ -2,17 +2,14 @@
 #include "./Point.h"
 #include "./Triangle.h"
 #include "./Rectangle.h"
-#include <Mathematics/Matrix4f.h>
 
-Rotator::Rotator(const float &i_angle,
-	const float &i_x, const float &i_y, const float &i_z) : angle(i_angle), x(i_x), y(i_y), z(i_z)
+Rotator::Rotator(const float &i_angle, const float &i_x, const float &i_y, const float &i_z) :
+	R(Math::Matrix4f::createRotation(i_angle, i_x, i_y, i_z))
 {
 }
 
 void Rotator::visit(Geometry::Triangle *i_triangle)
 {
-	Math::Matrix4f R = Math::Matrix4f::createRotation(angle, x, y, z);
-
 	// get triangle's centroid
 	Geometry::Point center = i_triangle->getCentroid();
 
@@ -31,14 +28,10 @@ void Rotator::visit(Geometry::Triangle *i_triangle)
 		// update 3-space coordinate
 		i_triangle->setVertex(i, Geometry::Point(new_hc[0], new_hc[1], new_hc[2]));
 	}
-
-	// send signal to views
 }
 
 void Rotator::visit(Geometry::Rectangle *i_rectangle)
 {
-	Math::Matrix4f R = Math::Matrix4f::createRotation(angle, x, y, z);
-
 	// get rectangle's centroid
 	Geometry::Point center = i_rectangle->getCentroid();
 
@@ -59,6 +52,4 @@ void Rotator::visit(Geometry::Rectangle *i_rectangle)
 	// update 3-space coordinate
 	i_rectangle->setLeftBottomVertex(Geometry::Point(new_hc_lbv[0], new_hc_lbv[1], new_hc_lbv[2]));
 	i_rectangle->setRightTopVertex(Geometry::Point(new_hc_rtv[0], new_hc_rtv[1], new_hc_rtv[2]));
-
-	// send signal to views
 }

@@ -64,15 +64,15 @@ namespace Geometry
 		Point right_bottom_vertex(right_top_vertex.x, left_bottom_vertex.y, right_top_vertex.z);
 		Point left_top_vertex(left_bottom_vertex.x, right_top_vertex.y, left_bottom_vertex.z);
 
-		std::vector<Point> vertices;
-		vertices.push_back(left_bottom_vertex);
-		vertices.push_back(right_bottom_vertex);
-		vertices.push_back(left_top_vertex);
-		vertices.push_back(left_top_vertex);
-		vertices.push_back(right_bottom_vertex);
-		vertices.push_back(right_top_vertex);
+		std::vector<Point> verts;
+		verts.push_back(left_bottom_vertex);
+		verts.push_back(right_bottom_vertex);
+		verts.push_back(left_top_vertex);
+		verts.push_back(left_top_vertex);
+		verts.push_back(right_bottom_vertex);
+		verts.push_back(right_top_vertex);
 
-		return vertices;
+		return verts;
 	}
 
 	const Point Rectangle::getCentroid() const
