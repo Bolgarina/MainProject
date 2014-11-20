@@ -52,4 +52,24 @@
       <Filter>Source Files\ControllerTests</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="EmptyFile.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="IncompleteRectangle.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="IncompleteTriangle.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="UnknownShape.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="WrongTriangleVertices.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="GoodShapes.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

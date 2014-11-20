@@ -93,6 +93,14 @@
     <ClCompile Include="TriangleTests.cpp" />
     <ClCompile Include="Vector4fTests.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="GoodShapes.txt" />
+    <Text Include="IncompleteRectangle.txt" />
+    <Text Include="IncompleteTriangle.txt" />
+    <Text Include="EmptyFile.txt" />
+    <Text Include="UnknownShape.txt" />
+    <Text Include="WrongTriangleVertices.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
