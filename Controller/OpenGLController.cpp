@@ -51,7 +51,10 @@ namespace
 	}
 }
 
-OpenGLController::OpenGLController(Model *i_model, View* i_view) : model(i_model), view(i_view), LEFT_BUTTON_down(false), RIGHT_BUTTON_down(false)
+OpenGLController::OpenGLController(Model *i_model, View* i_view) : 
+	model(i_model), view(i_view), LEFT_BUTTON_down(false), RIGHT_BUTTON_down(false),
+	dx(0.0f), dy(0.0f), dz(0.0f), sx(1.0f), sy(1.0f), sz(1.0f), angleX(0.0f), angleY(0.0f), angleZ(0.0f),
+	STEP(0.1f), FACTOR(2.0f), ANGLE((float)(5.0f * M_PI / 180.f))
 {
 	if (!i_view || !i_model)
 		throw std::runtime_error("Empty view/model");
@@ -76,7 +79,7 @@ void OpenGLController::init(int &i_argc, char **i_argv)
 
 void OpenGLController::display()
 {
-	view->display(&model->getTransformationMatrix(), model->getData());
+	view->display(&model->getModelMatrix(), model->getData());
 }
 
 void OpenGLController::reshape(int width, int height)
@@ -106,7 +109,7 @@ void OpenGLController::mouse(int button, int state, int x, int y)
 			printLog("RIGHT_BUTTON down");
 			RIGHT_BUTTON_down = true;
 		}
-		if (state == GLUT_UP)
+		else if (state == GLUT_UP)
 		{
 			printLog("RIGHT_BUTTON up");
 			RIGHT_BUTTON_down = false;
@@ -115,7 +118,7 @@ void OpenGLController::mouse(int button, int state, int x, int y)
 	case GLUT_MIDDLE_BUTTON:
 		if (state == GLUT_DOWN)
 			printLog("MIDDLE_BUTTON down");
-		if (state == GLUT_UP)
+		else if (state == GLUT_UP)
 			printLog("MIDDLE_BUTTON up");
 		break;
 	}
@@ -126,19 +129,17 @@ void OpenGLController::mouseWheel(int wheel, int direction, int x, int y)
 	switch (direction)
 	{
 	case 1:
-	{
-		Math::Matrix4f scaleMatrix = Math::Matrix4f::createScale(2.0f, 2.0f, 2.0f);
-		model->addTransformation(scaleMatrix);
+		sx = sy = sz *= FACTOR;
+		model->updateScale(sx, sy, sz);
 		view->postRedisplay();
 		break;
-	}
+
 	case -1:
-	{
-		Math::Matrix4f scaleMatrix = Math::Matrix4f::createScale(0.5f, 0.5f, 0.5f);
-		model->addTransformation(scaleMatrix);
+		sx = sy = sz /= FACTOR;
+		model->updateScale(sx, sy, sz);
 		view->postRedisplay();
 		break;
-	}
+
 	default:
 		break;
 	}
@@ -156,48 +157,36 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 	case 'y':
 	case 'Y':
 		if (RIGHT_BUTTON_down) // clockwise
-		{
-			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
-			model->addTransformation(rotateMatrix);
-			view->postRedisplay();
-		}
+			angleY += ANGLE;
 		else if (LEFT_BUTTON_down) // counterclockwise
-		{
-			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(-5.0f * M_PI / 180.f), 0.0f, 1.0f, 0.0f);
-			model->addTransformation(rotateMatrix);
-			view->postRedisplay();
-		}
+			angleY -= ANGLE;
+		
+		model->updateRotation(angleX, angleY, angleZ);
+		view->postRedisplay();
 		break;
+
 	case 'x':
 	case 'X':
 		if (RIGHT_BUTTON_down) // clockwise
-		{
-			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
-			model->addTransformation(rotateMatrix);
-			view->postRedisplay();
-		}
+			angleX += ANGLE;
 		else if (LEFT_BUTTON_down) // counterclockwise
-		{
-			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(-5.0f * M_PI / 180.f), 1.0f, 0.0f, 0.0f);
-			model->addTransformation(rotateMatrix);
-			view->postRedisplay();
-		}
+			angleX -= ANGLE;
+		
+		model->updateRotation(angleX, angleY, angleZ);
+		view->postRedisplay();
 		break;
+
 	case 'z':
 	case 'Z':
 		if (RIGHT_BUTTON_down) // clockwise
-		{
-			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
-			model->addTransformation(rotateMatrix);
-			view->postRedisplay();
-		}
+			angleZ += ANGLE;
 		else if (LEFT_BUTTON_down) // counterclockwise
-		{
-			Math::Matrix4f rotateMatrix = Math::Matrix4f::createRotation((float)(-5.0f * M_PI / 180.f), 0.0f, 0.0f, 1.0f);
-			model->addTransformation(rotateMatrix);
-			view->postRedisplay();
-		}
+			angleZ -= ANGLE;
+		
+		model->updateRotation(angleX, angleY, angleZ);
+		view->postRedisplay();
 		break;
+
 	default:
 		std::cout << (int)key << std::endl;
 	}
@@ -208,35 +197,30 @@ void OpenGLController::keySpecial(int key, int x, int y)
 	switch (key)
 	{
 	case GLUT_KEY_LEFT:
-	{
-		Math::Matrix4f translateMatrix = Math::Matrix4f::createTranslation(-0.1f, 0.0f, 0.0f);
-		model->addTransformation(translateMatrix);
+		dx -= STEP;
+		model->updateTranslation(dx, dy, dz);
 		view->postRedisplay();
 		break;
-	}
+
 	case GLUT_KEY_DOWN:
-	{
-		Math::Matrix4f translateMatrix = Math::Matrix4f::createTranslation(0.0f, -0.1f, 0.0f);
-		model->addTransformation(translateMatrix);
+		dy -= STEP;
+		model->updateTranslation(dx, dy, dz);
 		view->postRedisplay();
 		break;
-	}
+
 	case GLUT_KEY_RIGHT:
-	{
-		Math::Matrix4f translateMatrix = Math::Matrix4f::createTranslation(0.1f, 0.0f, 0.0f);
-		model->addTransformation(translateMatrix);
+		dx += STEP;
+		model->updateTranslation(dx, dy, dz);
 		view->postRedisplay();
 		break;
-	}
+
 	case GLUT_KEY_UP:
-	{
-		Math::Matrix4f translateMatrix = Math::Matrix4f::createTranslation(0.0f, 0.1f, 0.0f);
-		model->addTransformation(translateMatrix);
+		dy += STEP;
+		model->updateTranslation(dx, dy, dz);
 		view->postRedisplay();
 		break;
-	}
+
 	default:
-		printLog("Special key has been pressed.");
 		break;
 	}
 }

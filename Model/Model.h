@@ -11,11 +11,17 @@ public:
 	~Model();
 
 	const ShapesReader::ShList& getData() const;
-	void addTransformation(const Math::Matrix4f& i_transform);
-	const Math::Matrix4f& getTransformationMatrix() const;
+	const Math::Matrix4f getModelMatrix();
+
+	void updateTranslation(const float &dx, const float &dy, const float &dz);
+	void updateScale(const float &sx, const float &sy, const float &sz);
+	void updateRotation(const float &angleX, const float &angleY, const float &angleZ);
 
 private:
-	Math::Matrix4f transformationMatrix;
+	Math::Matrix4f TranslationMatrix;
+	Math::Matrix4f ScaleMatrix;
+	Math::Matrix4f RotationMatrix;
+
 #pragma warning (push)
 #pragma warning(disable:4251)
 	ShapesReader::ShList shapes;

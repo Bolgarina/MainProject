@@ -34,4 +34,9 @@ private:
 	View *view;
 
 	bool LEFT_BUTTON_down, RIGHT_BUTTON_down;
+
+	float dx, dy, dz;
+	float sx, sy, sz;
+	float angleX, angleY, angleZ;
+	const float STEP, FACTOR, ANGLE;
 };
