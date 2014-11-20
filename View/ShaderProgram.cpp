@@ -108,9 +108,9 @@ GLint ShaderProgram::getUniformLocation(const std::string &i_uniform) const
 	return uniform_location;
 }
 
-void ShaderProgram::setUniformVector(const GLint &i_location, const std::vector<float> &i_vector)
+void ShaderProgram::setUniformVector(const GLint &i_location, const Math::Vector4f &i_vector)
 {
-	glUniform4fv(i_location, 1, &i_vector[0]);
+	glUniform4fv(i_location, 1, &i_vector.get().front());
 	// The first parameter is the location of the uniform variable (retrieved after shader compilation using glGetUniformLocation()).
 	// The second parameter indicates the number of vectors we are updating.
 }

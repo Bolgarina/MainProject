@@ -82,16 +82,9 @@ namespace Geometry
 			(getLeftBottomVertex().z + getRightTopVertex().z) / 2.0f);
 	}
 
-	std::vector<float> Rectangle::getColor() const
+	const Math::Vector4f Rectangle::getColor() const
 	{
-		std::vector<float> vColor;
-
-		vColor.push_back(color.r);
-		vColor.push_back(color.g);
-		vColor.push_back(color.b);
-		vColor.push_back(color.alpha);
-
-		return vColor;
+		return Math::Vector4f(color.r, color.g, color.b, color.alpha);
 	}
 
 	void Rectangle::setLeftBottomVertex(Point i_pt)

@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 	ShapesReader reader("InputShapes.txt");
 	
 	if (!reader.read())
-		exit(EXIT_FAILURE);
+		return 1;
 
 	Model model(reader.getShapes());
 	View view;
@@ -25,7 +25,6 @@ int main(int argc, char **argv)
 	{
 		std::cerr << "Runtime error: " << e.what() << std::endl;
 		return 1;
-		//exit(EXIT_FAILURE);
 	}
 
 	controller->init(argc, argv);

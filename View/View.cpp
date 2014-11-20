@@ -4,6 +4,7 @@
 #include <FreeGlut/glut.h>
 #include <FreeGlut/freeglut_ext.h>
 #include <Model/IShape.h>
+#include <Mathematics/Vector4f.h>
 
 #include <iostream>
 
@@ -59,6 +60,7 @@ void View::startInit(int &i_argc, char **i_argv)
 
 	glEnable(GL_DEPTH_TEST);
 
+	// Shader program initialization
 	sh_program.init("shader.vert", "shader.frag");
 
 	a_coord = sh_program.getAttributeLocation("coord");
@@ -126,7 +128,7 @@ void View::render(Geometry::IShape *i_shape, const Math::Matrix4f *const p_trans
 		sh_program.bind();
 		sh_program.setUniformMatrix(u_transformationMatrix, *p_transformationMatrix);
 
-		std::vector<float> color = i_shape->getColor();
+		Math::Vector4f color = i_shape->getColor();
 		sh_program.setUniformVector(u_color, color);
 
 		glEnableVertexAttribArray(a_coord); // lets to use a_coord

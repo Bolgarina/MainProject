@@ -2,6 +2,7 @@
 
 #include <Model/Point.h>
 #include <Model/Triangle.h>
+#include <Mathematics/Vector4f.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace Geometry;
@@ -15,7 +16,7 @@ namespace UnitTests
 		TEST_METHOD(ShouldBe_0_0_0__1_0_0__0_1_0_BlackTriangleWhenDefaultCtor)
 		{
 			Triangle tr;
-			std::vector<float> color = tr.getColor();
+			Math::Vector4f color = tr.getColor();
 
 			Assert::IsTrue(tr.getVertices()[0] == Point(0.0f, 0.0f, 0.0f));
 			Assert::IsTrue(tr.getVertices()[1] == Point(1.0f, 0.0f, 0.0f));
@@ -28,7 +29,7 @@ namespace UnitTests
 			Point vertices[3] = { Point(1.0f, 2.0f, 3.0f), Point(4.0f, 5.0f, 6.0f), Point(7.0f, 8.0f, 9.0f) };
 			
 			Triangle tr(vertices[0], vertices[1], vertices[2]);
-			std::vector<float> color = tr.getColor();
+			Math::Vector4f color = tr.getColor();
 
 			Assert::IsTrue(tr.getVertices()[0] == vertices[0]);
 			Assert::IsTrue(tr.getVertices()[1] == vertices[1]);
@@ -42,7 +43,7 @@ namespace UnitTests
 			Color cl(0.1f, 0.2f, 0.3f, 0.4f);
 
 			Triangle tr(vertices[0], vertices[1], vertices[2], cl);
-			std::vector<float> color = tr.getColor();
+			Math::Vector4f color = tr.getColor();
 
 			Assert::IsTrue(tr.getVertices()[0] == vertices[0]);
 			Assert::IsTrue(tr.getVertices()[1] == vertices[1]);
@@ -76,7 +77,7 @@ namespace UnitTests
 		{
 			Triangle tr1(Point(1.0f, 2.0f, 3.0f), Point(4.0f, 5.0f, 6.0f), Point(7.0f, 8.0f, 9.0f));
 			Triangle tr2(tr1);
-			std::vector<float> color = tr2.getColor();
+			Math::Vector4f color = tr2.getColor();
 
 			Assert::IsTrue(tr1.getVertices()[0] == tr2.getVertices()[0]);
 			Assert::IsTrue(tr1.getVertices()[1] == tr2.getVertices()[1]);
@@ -89,7 +90,7 @@ namespace UnitTests
 			Color cl(0.1f, 0.2f, 0.3f, 0.4f);
 			Triangle tr1(Point(1.0f, 2.0f, 3.0f), Point(4.0f, 5.0f, 6.0f), Point(7.0f, 8.0f, 9.0f), cl);
 			Triangle tr2(tr1);
-			std::vector<float> color = tr2.getColor();
+			Math::Vector4f color = tr2.getColor();
 
 			Assert::IsTrue(tr1.getVertices()[0] == tr2.getVertices()[0]);
 			Assert::IsTrue(tr1.getVertices()[1] == tr2.getVertices()[1]);
@@ -146,7 +147,7 @@ namespace UnitTests
 			Color cl(1.0f, 2.0f, 3.0f, 4.0f);
 			Triangle tr(Point(-1.0f, -1.0f, 1.0f), Point(1.0f, -1.0f, -1.0f), Point(0.0f, 2.0f, 0.0f), cl);
 
-			std::vector<float> color = tr.getColor();
+			Math::Vector4f color = tr.getColor();
 			Assert::IsTrue(Color(color[0], color[1], color[2], color[3]) == cl);
 		}
 

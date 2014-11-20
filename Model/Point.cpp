@@ -1,5 +1,8 @@
 #include "./Point.h"
 
+#include <cmath>
+#include <cfloat>
+
 namespace Geometry
 {
 	Point::Point() : x(0.0f), y(0.0f), z(0.0f)
@@ -20,6 +23,8 @@ namespace Geometry
 
 	bool Point::operator==(const Point &i_point) const
 	{
-		return (this->x == i_point.x) && (this->y == i_point.y) && (this->z == i_point.z);
+		return (std::abs(x - i_point.x) <= FLT_EPSILON) && 
+			(std::abs(y - i_point.y) <= FLT_EPSILON) && 
+			(std::abs(z - i_point.z) <= FLT_EPSILON);
 	}
 }

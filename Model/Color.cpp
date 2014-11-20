@@ -1,5 +1,8 @@
 #include "./Color.h"
 
+#include <cmath>
+#include <cfloat>
+
 namespace Geometry
 {
 	Color::Color() : r(1.0f), g(1.0f), b(1.0f), alpha(1.0f)
@@ -22,6 +25,9 @@ namespace Geometry
 
 	bool Color::operator==(const Color &i_color) const
 	{
-		return (this->r == i_color.r) && (this->g == i_color.g) && (this->b == i_color.b) && (this->alpha == i_color.alpha);
+		return (std::abs(r - i_color.r) <= FLT_EPSILON) && 
+			(std::abs(g - i_color.g) <= FLT_EPSILON) && 
+			(std::abs(b - i_color.b) <= FLT_EPSILON) && 
+			(std::abs(alpha - i_color.alpha) <= FLT_EPSILON);
 	}
 }

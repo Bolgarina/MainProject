@@ -1,5 +1,8 @@
 #include "./Vector4f.h"
 
+#include <cmath>
+#include <cfloat>
+
 namespace Math
 {
 	Vector4f::Vector4f() : vect(VECTOR_SIZE, 0.0f)
@@ -94,7 +97,10 @@ namespace Math
 
 	const bool Vector4f::operator==(const Vector4f &rhs)
 	{
-		return this->vect[0] == rhs[0] && this->vect[1] == rhs[1] && this->vect[2] == rhs[2] && this->vect[3] == rhs[3];
+		return (std::abs(vect[0] - rhs[0]) <= FLT_EPSILON) && 
+			(std::abs(vect[1] - rhs[1]) <= FLT_EPSILON) && 
+			(std::abs(vect[2] - rhs[2]) <= FLT_EPSILON) && 
+			(std::abs(vect[3] - rhs[3]) <= FLT_EPSILON);
 	}
 
 	const std::vector<float> &Vector4f::get() const

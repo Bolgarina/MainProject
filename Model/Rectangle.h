@@ -29,7 +29,7 @@ namespace Geometry
 		const Point& getRightTopVertex() const;
 		std::vector<Point> getVertices() const;
 		const Point getCentroid() const;
-		std::vector<float> getColor() const;
+		const Math::Vector4f getColor() const;
 
 		void setLeftBottomVertex(Point i_pt);
 		void setRightTopVertex(Point i_pt);

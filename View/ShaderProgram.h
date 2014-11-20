@@ -25,7 +25,7 @@ public:
 	GLint getUniformLocation(const std::string &i_uniform) const;     // Method to returns the bound location of a named uniform
 
 	// Load data into uniform shader variables
-	void setUniformVector(const GLint &i_location, const std::vector<float> &i_vector);
+	void setUniformVector(const GLint &i_location, const Math::Vector4f &i_vector);
 	void setUniformMatrix(const GLint &i_location, const Math::Matrix4f &i_transformationMatrix);
 
 private:

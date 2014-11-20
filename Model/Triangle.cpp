@@ -63,16 +63,9 @@ namespace Geometry
 			(vertices[0].z + vertices[1].z + vertices[2].z) / 3.0f);
 	}
 
-	std::vector<float> Triangle::getColor() const
+	const Math::Vector4f Triangle::getColor() const
 	{
-		std::vector<float> vColor;
-
-		vColor.push_back(color.r);
-		vColor.push_back(color.g);
-		vColor.push_back(color.b);
-		vColor.push_back(color.alpha);
-
-		return vColor;
+		return Math::Vector4f(color.r, color.g, color.b, color.alpha);
 	}
 
 	void Triangle::setVertex(size_t i_index, Point i_pt)

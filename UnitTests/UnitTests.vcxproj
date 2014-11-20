@@ -89,6 +89,7 @@
     <ClCompile Include="Matrix4fTests.cpp" />
     <ClCompile Include="PointTests.cpp" />
     <ClCompile Include="RectangleTests.cpp" />
+    <ClCompile Include="ShapesReaderTests.cpp" />
     <ClCompile Include="TriangleTests.cpp" />
     <ClCompile Include="Vector4fTests.cpp" />
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include <Model/Point.h>
 #include <Model/Color.h>
 #include <Model/Rectangle.h>
+#include <Mathematics/Vector4f.h>
 
 #include <vector>
 
@@ -18,7 +19,7 @@ namespace UnitTests
 		TEST_METHOD(ShouldBeIdentityBlackSquareWhenDefaultCtor)
 		{
 			Rectangle rect;
-			std::vector<float> color = rect.getColor();
+			Math::Vector4f color = rect.getColor();
 
 			Assert::IsTrue(rect.getLeftBottomVertex() == Point());
 			Assert::IsTrue(rect.getRightTopVertex() == Point(1.0f, 1.0f, 0.0f));
@@ -31,7 +32,7 @@ namespace UnitTests
 			Point pt_right_top(13.0f, 22.0f, 16.0f);
 
 			Rectangle rect(pt_left_bottom, pt_right_top);
-			std::vector<float> color = rect.getColor();
+			Math::Vector4f color = rect.getColor();
 
 			Assert::IsTrue(rect.getLeftBottomVertex() == pt_left_bottom);
 			Assert::IsTrue(rect.getRightTopVertex() == pt_right_top);
@@ -45,7 +46,7 @@ namespace UnitTests
 			Color cl(0.1f, 0.2f, 0.3f, 0.4f);
 
 			Rectangle rect(pt_left_bottom, pt_right_top, cl);
-			std::vector<float> color = rect.getColor();
+			Math::Vector4f color = rect.getColor();
 
 			Assert::IsTrue(rect.getLeftBottomVertex() == pt_left_bottom);
 			Assert::IsTrue(rect.getRightTopVertex() == pt_right_top);
@@ -85,7 +86,7 @@ namespace UnitTests
 			Rectangle rect1(Point(-23.0f, 42.0f, 10.0f), Point(13.0f, 22.0f, 16.0f));
 			Rectangle rect2(rect1);
 
-			std::vector<float> color = rect2.getColor();
+			Math::Vector4f color = rect2.getColor();
 
 			Assert::IsTrue(rect2.getLeftBottomVertex() == rect1.getLeftBottomVertex());
 			Assert::IsTrue(rect2.getRightTopVertex() == rect1.getRightTopVertex());
@@ -99,7 +100,7 @@ namespace UnitTests
 			Rectangle rect1(Point(-23.0f, 42.0f, 10.0f), Point(13.0f, 22.0f, 16.0f), cl);
 			Rectangle rect2(rect1);
 
-			std::vector<float> color = rect2.getColor();
+			Math::Vector4f color = rect2.getColor();
 
 			Assert::IsTrue(rect2.getLeftBottomVertex() == rect1.getLeftBottomVertex());
 			Assert::IsTrue(rect2.getRightTopVertex() == rect1.getRightTopVertex());
@@ -167,7 +168,7 @@ namespace UnitTests
 			Color cl(1.0f, 2.0f, 3.0f, 4.0f);
 			Rectangle rect(Point(-3.0f, -2.0f, -1.0f), Point(3.0f, 2.0f, 1.0f), cl);
 
-			std::vector<float> color = rect.getColor();
+			Math::Vector4f color = rect.getColor();
 			Assert::IsTrue(Color(color[0], color[1], color[2], color[3]) == cl);
 		}
 

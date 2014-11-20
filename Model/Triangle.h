@@ -26,7 +26,7 @@ namespace Geometry
 
 		std::vector<Point> getVertices() const;
 		const Point getCentroid() const;
-		std::vector<float> getColor() const;
+		const Math::Vector4f getColor() const;
 
 		void setVertex(size_t i_index, Point i_pt);
 
