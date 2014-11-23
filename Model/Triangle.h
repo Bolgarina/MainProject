@@ -1,7 +1,5 @@
 #pragma once
 
-#include "./DllApi.h"
-		  
 #include "./IShape.h"
 #include "./Point.h"
 #include "./Color.h"
@@ -13,7 +11,7 @@ class IVisitor;
 
 namespace Geometry
 {
-	class MODEL_API Triangle : public IShape
+	class Triangle : public IShape
 	{
 	public:
 		Triangle();
@@ -31,10 +29,7 @@ namespace Geometry
 		void setVertex(size_t i_index, Point i_pt);
 
 	private:
-#pragma warning (push)
-#pragma warning(disable:4251)
 		std::vector<Point> vertices;
-#pragma warning (pop)
 		Color color;
 	};
 }

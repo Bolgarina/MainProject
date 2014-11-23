@@ -18,9 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DllApi.h">
-      <Filter>LibSettings</Filter>
-    </ClInclude>
     <ClInclude Include="View.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -1,14 +1,12 @@
 #pragma once
 
-#include "./DllApi.h"
-
 namespace Geometry
 {
 	class Triangle;
 	class Rectangle;
 }
 
-class MODEL_API IVisitor
+class IVisitor
 {
 public:
 	virtual ~IVisitor() {};

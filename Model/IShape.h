@@ -1,6 +1,5 @@
 #pragma once
 
-#include "./DllApi.h"
 #include "./Point.h"
 
 #include <Mathematics/Vector4f.h>
@@ -11,7 +10,7 @@ class IVisitor;
 
 namespace Geometry
 {
-	class MODEL_API IShape
+	class IShape
 	{
 	public:
 		virtual ~IShape() {};

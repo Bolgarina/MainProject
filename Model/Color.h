@@ -1,12 +1,10 @@
 #pragma once
 
-#include "./DllApi.h"
-
 #include <vector>
 
 namespace Geometry
 {
-	struct MODEL_API Color
+	struct Color
 	{
 		Color();
 		Color(const float i_r, const float i_g, const float i_b, const float i_alpha = 1.0f);

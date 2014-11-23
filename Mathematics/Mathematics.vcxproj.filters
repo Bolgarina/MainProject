@@ -21,9 +21,6 @@
     <ClInclude Include="_Link.h">
       <Filter>LibSettings</Filter>
     </ClInclude>
-    <ClInclude Include="DllApi.h">
-      <Filter>LibSettings</Filter>
-    </ClInclude>
     <ClInclude Include="Vector4f.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -1,13 +1,11 @@
 #pragma once
 
-#include "./DllApi.h"
-
 #include <Model/IShape.h>
 #include <string>
 #include <list>
 #include <memory>
 
-class CONTROLLER_API ShapesReader
+class ShapesReader
 {
 public:
 	typedef std::list<std::shared_ptr<Geometry::IShape>> ShList;
@@ -19,9 +17,6 @@ public:
 	ShList &getShapes();
 
 private:
-#pragma warning (push)
-#pragma warning(disable:4251)
 	const std::string name;
 	ShList shapes;
-#pragma warning (pop)
 };

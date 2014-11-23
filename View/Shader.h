@@ -1,13 +1,11 @@
 #pragma once
 
-#include "./DllApi.h"
-
 #include <FreeGlew/glew.h>
 #include <FreeGlut/glut.h>
 
 #include <string>
 
-class VIEW_API Shader
+class Shader
 {
 public:
 	Shader();

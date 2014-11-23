@@ -1,10 +1,9 @@
 #pragma once
 
-#include "./DllApi.h"
 #include <Controller/ShapesReader.h>
 #include <Mathematics/Matrix4f.h>
 
-class MODEL_API Model
+class Model
 {
 public:
 	Model(ShapesReader::ShList &i_shapes);
@@ -22,8 +21,5 @@ private:
 	Math::Matrix4f ScaleMatrix;
 	Math::Matrix4f RotationMatrix;
 
-#pragma warning (push)
-#pragma warning(disable:4251)
 	ShapesReader::ShList shapes;
-#pragma warning (pop)
 };

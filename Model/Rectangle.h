@@ -1,7 +1,5 @@
 #pragma once
 
-#include "./DllApi.h"
-
 #include "./IShape.h"
 #include "./Point.h"
 #include "./Color.h"
@@ -14,7 +12,7 @@ class IVisitor;
 
 namespace Geometry
 {
-	class MODEL_API Rectangle : public IShape
+	class Rectangle : public IShape
 	{
 	public:
 		Rectangle();
@@ -41,10 +39,7 @@ namespace Geometry
 			ERIGHT_TOP,
 		};
 		
-#pragma warning (push)
-#pragma warning(disable:4251)
 		std::vector<Point> vertices;
-#pragma warning (pop)
 		Color color;
 	};
 }

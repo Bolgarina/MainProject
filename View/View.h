@@ -1,6 +1,5 @@
 #pragma once
 
-#include "./DllApi.h"
 #include "./ShaderProgram.h"
 
 #include <list>
@@ -16,7 +15,7 @@ namespace Geometry
 	class IShape;
 }
 
-class VIEW_API View
+class View
 {
 public:
 	View();

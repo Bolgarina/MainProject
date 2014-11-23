@@ -1,12 +1,10 @@
 #pragma once
 
-#include "./DllApi.h"
-
 #include <vector>
 
 namespace Math
 {
-	class MATHEMATICS_API Vector4f
+	class Vector4f
 	{
 	public:
 		static const size_t VECTOR_SIZE = 4;
@@ -38,9 +36,6 @@ namespace Math
 		const float& operator[](const size_t &index) const;
 
 	private:
-#pragma warning (push)
-#pragma warning(disable:4251)
 		std::vector<float> vect;
-#pragma warning (pop)
 	};
 }

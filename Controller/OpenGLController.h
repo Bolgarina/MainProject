@@ -1,7 +1,5 @@
 #pragma once
 
-#include "./DllApi.h"
-
 #include "./IController.h"
 #include "./ShapesReader.h"
 
@@ -10,7 +8,7 @@
 class Model;
 class View;
 
-class CONTROLLER_API OpenGLController: public IController
+class OpenGLController: public IController
 {
 public:
 	OpenGLController(Model *i_model, View* i_view);

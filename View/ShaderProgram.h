@@ -1,14 +1,12 @@
 #pragma once
 
-#include "./DllApi.h"
-
 #include "./Shader.h"
 
 #include <string>
 #include <vector>
 #include <Mathematics/Matrix4f.h>
 
-class VIEW_API ShaderProgram
+class ShaderProgram
 {
 public:
 	ShaderProgram();

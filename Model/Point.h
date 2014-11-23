@@ -1,10 +1,8 @@
 #pragma once
 
-#include "./DllApi.h"
-
 namespace Geometry
 {
-	struct MODEL_API Point
+	struct Point
 	{
 		Point();
 		Point(float i_x, float i_y, float i_z);

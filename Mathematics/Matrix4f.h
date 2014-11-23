@@ -1,14 +1,12 @@
 #pragma once
 
-#include "./DllApi.h"
-
 #include "./Vector4f.h"
 
 #include <vector>
 
 namespace Math
 {
-	class MATHEMATICS_API Matrix4f
+	class Matrix4f
 	{
 	public:
 		Matrix4f();
@@ -57,10 +55,7 @@ namespace Math
 		static Matrix4f createPerspective(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far);
 
 	protected:
-#pragma warning (push)
-#pragma warning(disable:4251)
 		static const size_t MATRIX_SIZE = 4; // = Vector4f::VECTOR_SIZE
 		std::vector<Vector4f> matrix;
-#pragma warning (pop)
 	};
 }

@@ -1,8 +1,6 @@
 #pragma once
 
-#include "./DllApi.h"
-
-class CONTROLLER_API IController
+class IController
 {
 public:
 	virtual ~IController() {};
