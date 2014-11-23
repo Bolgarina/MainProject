@@ -13,10 +13,13 @@ ShaderProgram::ShaderProgram(const std::string &vsFile, const std::string &fsFil
 
 ShaderProgram::~ShaderProgram()
 {
-	glDetachShader(program_id, shader_fp.id());
-	glDetachShader(program_id, shader_vp.id());
+	if (program_id != 0)
+	{
+		glDetachShader(program_id, shader_fp.id());
+		glDetachShader(program_id, shader_vp.id());
 
-	glDeleteProgram(program_id);
+		glDeleteProgram(program_id);
+	}
 }
 
 bool ShaderProgram::init(const std::string &i_vsFile, const std::string &i_fsFile)

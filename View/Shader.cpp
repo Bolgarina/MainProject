@@ -11,7 +11,8 @@ Shader::Shader() : shader_id(0)
 
 Shader::~Shader()
 {
-	glDeleteShader(shader_id);
+	if (shader_id != 0)
+		glDeleteShader(shader_id);
 	// shader is tagged for deletion and deleted if it is no longer being used by any shader program
 }
 
