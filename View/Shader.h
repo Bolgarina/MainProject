@@ -11,7 +11,7 @@ public:
 	Shader();
 	~Shader();
 
-	void init(const GLenum &i_type, const std::string &i_fileName);
+	bool init(const GLenum &i_type, const std::string &i_fileName);
 	const GLuint &id() const;
 	void compile() const;
 	bool validateShader() const;
@@ -19,5 +19,5 @@ public:
 private:
 	GLuint shader_id;
 
-	std::string loadFromFile(const std::string &i_fileName) const;
+	bool loadFromFile(const std::string &i_fileName, std::string &o_content) const;
 };

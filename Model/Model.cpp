@@ -25,17 +25,17 @@ const Matrix4f Model::getModelMatrix()
 	return TranslationMatrix * RotationMatrix * ScaleMatrix;
 }
 
-void Model::updateTranslation(const float &dx, const float &dy, const float &dz)
+void Model::updateTranslation(const float dx, const float dy, const float dz)
 {
 	TranslationMatrix = Matrix4f::createTranslation(dx, dy, dz);
 }
 
-void Model::updateScale(const float &sx, const float &sy, const float &sz)
+void Model::updateScale(const float sx, const float sy, const float sz)
 {
 	ScaleMatrix = Matrix4f::createScale(sx, sy, sz);
 }
 
-void Model::updateRotation(const float &angleX, const float &angleY, const float &angleZ)
+void Model::updateRotation(const float angleX, const float angleY, const float angleZ)
 {
 	RotationMatrix  = Matrix4f::createRotation(angleX, 1.0f, 0.0f, 0.0f);
 	RotationMatrix *= Matrix4f::createRotation(angleY, 0.0f, 1.0f, 0.0f);

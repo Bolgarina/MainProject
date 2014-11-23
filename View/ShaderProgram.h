@@ -13,7 +13,7 @@ public:
 	ShaderProgram(const std::string &i_vsFile, const std::string &i_fsFile);
 	~ShaderProgram();
 
-	void init(const std::string &i_vsFile, const std::string &i_fsFile);
+	bool init(const std::string &i_vsFile, const std::string &i_fsFile);
 	void bind() const;         // to enable the shader program
 	void unbind() const;       // to disable the shader program
 	const GLuint &id() const;  // to get the number associated with the shader program, so that variable can be passed through to the shader program

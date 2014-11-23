@@ -4,7 +4,6 @@
 #include "./Point.h"
 #include "./Color.h"
 
-#include <iostream>
 #include <string>
 #include <vector>
 
@@ -16,7 +15,7 @@ namespace Geometry
 	{
 	public:
 		Rectangle();
-		Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex, Color i_color = Color());
+		Rectangle(const Point i_left_bottom_vertex, const Point i_right_top_vertex, const Color i_color = Color());
 		explicit Rectangle(const Rectangle &i_rect);
 		~Rectangle();
 
@@ -29,8 +28,8 @@ namespace Geometry
 		const Point getCentroid() const;
 		const Math::Vector4f getColor() const;
 
-		void setLeftBottomVertex(Point i_pt);
-		void setRightTopVertex(Point i_pt);
+		void setLeftBottomVertex(const Point i_pt);
+		void setRightTopVertex(const Point i_pt);
 
 	private:
 		enum ECorner

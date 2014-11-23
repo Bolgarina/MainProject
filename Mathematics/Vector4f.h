@@ -1,5 +1,6 @@
 #pragma once
 
+#include "./Matrix.h"
 #include <vector>
 
 namespace Math
@@ -7,7 +8,6 @@ namespace Math
 	class Vector4f
 	{
 	public:
-		static const size_t VECTOR_SIZE = 4;
 
 		Vector4f();
 		Vector4f(const float arg1, const float arg2, const float arg3, const float arg4);

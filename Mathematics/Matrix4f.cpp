@@ -4,13 +4,13 @@
 
 namespace Math
 {
-	Matrix4f::Matrix4f() : matrix(MATRIX_SIZE, Vector4f())
+	Matrix4f::Matrix4f() : matrix(SIZE, Vector4f())
 	{
 	}
 
-	Matrix4f::Matrix4f(const Vector4f vect1, const Vector4f vect2, const Vector4f vect3, const Vector4f vect4)
+	Matrix4f::Matrix4f(const Vector4f &vect1, const Vector4f &vect2, const Vector4f &vect3, const Vector4f &vect4)
 	{
-		matrix.reserve(MATRIX_SIZE);
+		matrix.reserve(SIZE);
 		matrix.push_back(vect1);
 		matrix.push_back(vect2);
 		matrix.push_back(vect3);
@@ -33,8 +33,8 @@ namespace Math
 		if (&rhs == this)
 			return *this;
 
-		matrix.resize(MATRIX_SIZE);
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		matrix.resize(SIZE);
+		for (size_t i = 0; i < SIZE; i++)
 			matrix[i] = rhs[i];
 
 		return *this;
@@ -44,7 +44,7 @@ namespace Math
 	Matrix4f Matrix4f::operator+(const Matrix4f &rhs)
 	{
 		Matrix4f result;
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		for (size_t i = 0; i < SIZE; i++)
 			result[i] = this->matrix[i] + rhs[i];
 
 		return result;
@@ -53,7 +53,7 @@ namespace Math
 	// Cumulative addition of this matrix and another                                                                                                                             
 	Matrix4f& Matrix4f::operator+=(const Matrix4f &rhs)
 	{
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		for (size_t i = 0; i < SIZE; i++)
 			this->matrix[i] += rhs[i];
 
 		return *this;
@@ -63,7 +63,7 @@ namespace Math
 	Matrix4f Matrix4f::operator-(const Matrix4f &rhs)
 	{
 		Matrix4f result;
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		for (size_t i = 0; i < SIZE; i++)
 			result[i] = this->matrix[i] - rhs[i];
 
 		return result;
@@ -72,7 +72,7 @@ namespace Math
 	// Cumulative subtraction of this matrix and another                                                                                                                          
 	Matrix4f& Matrix4f::operator-=(const Matrix4f &rhs)
 	{
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		for (size_t i = 0; i < SIZE; i++)
 			this->matrix[i] -= rhs[i];
 
 		return *this;
@@ -82,9 +82,9 @@ namespace Math
 	Matrix4f Matrix4f::operator*(const Matrix4f &rhs)
 	{
 		Matrix4f result;
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
-			for (size_t j = 0; j < MATRIX_SIZE; j++)
-				for (size_t k = 0; k < MATRIX_SIZE; k++)
+		for (size_t i = 0; i < SIZE; i++)
+			for (size_t j = 0; j < SIZE; j++)
+				for (size_t k = 0; k < SIZE; k++)
 					result[i][j] += this->matrix[i][k] * rhs[k][j];
 
 		return result;
@@ -102,8 +102,8 @@ namespace Math
 	Matrix4f Matrix4f::transpose()
 	{
 		Matrix4f result;
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
-			for (size_t j = 0; j < MATRIX_SIZE; j++)
+		for (size_t i = 0; i < SIZE; i++)
+			for (size_t j = 0; j < SIZE; j++)
 				result[i][j] = this->matrix[j][i];
 
 		return result;
@@ -113,7 +113,7 @@ namespace Math
 	Matrix4f Matrix4f::operator*(const float &rhs)
 	{
 		Matrix4f result;
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		for (size_t i = 0; i < SIZE; i++)
 			result[i] = this->matrix[i] * rhs;
 
 		return result;
@@ -122,11 +122,11 @@ namespace Math
 	// Matrix/scalar division                                                                                                                                                     
 	Matrix4f Matrix4f::operator/(const float &rhs)
 	{
-		if (!rhs)
+		if (std::abs(rhs) < FLT_EPSILON)
 			throw std::invalid_argument("Invalid argument (division by 0).");
 
 		Matrix4f result;
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		for (size_t i = 0; i < SIZE; i++)
 			result[i] = this->matrix[i] / rhs;
 
 		return result;
@@ -136,8 +136,8 @@ namespace Math
 	Vector4f Matrix4f::operator*(const Vector4f &rhs)
 	{
 		Vector4f result;
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
-			for (size_t j = 0; j < MATRIX_SIZE; j++)
+		for (size_t i = 0; i < SIZE; i++)
+			for (size_t j = 0; j < SIZE; j++)
 				result[i] += this->matrix[i][j] * rhs[j];
 
 		return result;
@@ -151,8 +151,8 @@ namespace Math
 	std::vector<float> Matrix4f::get() const
 	{
 		std::vector<float> vec;
-		vec.reserve(MATRIX_SIZE * MATRIX_SIZE);
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		vec.reserve(SIZE * SIZE);
+		for (size_t i = 0; i < SIZE; i++)
 		{
 			std::vector<float> row = matrix[i].get();
 			vec.insert(vec.end(), row.begin(), row.end());
@@ -177,14 +177,14 @@ namespace Math
 	Matrix4f Matrix4f::createIdentity()
 	{
 		Matrix4f matrix;
-		for (size_t i = 0; i < MATRIX_SIZE; i++)
+		for (size_t i = 0; i < SIZE; i++)
 			matrix[i][i] = 1.0f;
 
 		return matrix;
 	}
 
 	// Transformation matrices (static)
-	Matrix4f Matrix4f::createTranslation(const float &dx, const float &dy, const float &dz)
+	Matrix4f Matrix4f::createTranslation(const float dx, const float dy, const float dz)
 	{
 		Matrix4f matrix = createIdentity();
 		matrix[0][3] = dx;
@@ -194,7 +194,7 @@ namespace Math
 		return matrix;
 	}
 
-	Matrix4f Matrix4f::createScale(const float &sx, const float &sy, const float &sz)
+	Matrix4f Matrix4f::createScale(const float sx, const float sy, const float sz)
 	{
 		Matrix4f matrix = createIdentity();
 		matrix[0][0] = sx;
@@ -204,7 +204,7 @@ namespace Math
 		return matrix;
 	}
 
-	Matrix4f Matrix4f::createRotation(const float &angle, const float &x, const float &y, const float &z)
+	Matrix4f Matrix4f::createRotation(const float angle, const float x, const float y, const float z)
 	{
 		float s = sinf(angle);
 		float c = cosf(angle);
@@ -233,7 +233,7 @@ namespace Math
 	}
 
 	// Projection matrices (static)
-	Matrix4f Matrix4f::createOrtho(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
+	Matrix4f Matrix4f::createOrtho(const float left, const float right, const float bottom, const float top, const float near, const float far)
 	{
 		if (right == left || top == bottom || far == near)
 			throw std::invalid_argument("Invalid arguments (left/bottom/near should not be equal to right/top/far respectively).");
@@ -254,7 +254,7 @@ namespace Math
 		return matrix;
 	}
 
-	Matrix4f Matrix4f::createPerspective(const float &left, const float &right, const float &bottom, const float &top, const float &near, const float &far)
+	Matrix4f Matrix4f::createPerspective(const float left, const float right, const float bottom, const float top, const float near, const float far)
 	{
 		if (right == left || top == bottom || far == near)
 			throw std::invalid_argument("Invalid arguments (left/bottom/near should not be equal to right/top/far respectively).");

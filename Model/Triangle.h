@@ -15,7 +15,7 @@ namespace Geometry
 	{
 	public:
 		Triangle();
-		Triangle(Point i_vertex1, Point i_vertex2, Point i_vertex3, Color i_color = Color());
+		Triangle(const Point i_vertex1, const Point i_vertex2, const Point i_vertex3, const Color i_color = Color());
 		explicit Triangle(const Triangle &i_triangle);
 		~Triangle();
 
@@ -26,7 +26,7 @@ namespace Geometry
 		const Point getCentroid() const;
 		const Math::Vector4f getColor() const;
 
-		void setVertex(size_t i_index, Point i_pt);
+		void setVertex(const size_t i_index, Point i_pt);
 
 	private:
 		std::vector<Point> vertices;

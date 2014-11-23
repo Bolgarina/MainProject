@@ -3,8 +3,6 @@
 
 #include "./OpenGLController.h"
 
-#include <Mathematics/Matrix4f.h>
-
 #include <Model/Model.h>
 #include <View/View.h>
 
@@ -51,40 +49,43 @@ namespace
 	}
 }
 
-OpenGLController::OpenGLController(Model *i_model, View* i_view) : 
+OpenGLController::OpenGLController(Model &i_model, View &i_view) :
 	model(i_model), view(i_view), LEFT_BUTTON_down(false), RIGHT_BUTTON_down(false),
 	dx(0.0f), dy(0.0f), dz(0.0f), sx(1.0f), sy(1.0f), sz(1.0f), angleX(0.0f), angleY(0.0f), angleZ(0.0f),
 	STEP(0.1f), FACTOR(2.0f), ANGLE((float)(5.0f * M_PI / 180.f))
 {
-	if (!i_view || !i_model)
-		throw std::runtime_error("Empty view/model");
 }
 
-void OpenGLController::init(int &i_argc, char **i_argv)
+bool OpenGLController::init(int &i_argc, char **i_argv)
 {
 	g_controller = this;
 
-	view->startInit(i_argc, i_argv);
+	bool res = view.startInit(i_argc, i_argv);
 
-	view->setDisplayCallback(displayCallback);
-	view->setReshapeCallback(reshapeCallback);
-	view->setMouseCallback(mouseCallback);
-	view->setMouseWheelCallback(mouseWheelCallback);
-	view->setMotionCallback(motionCallback);
-	view->setKeyboardCallback(keyboardCallback);
-	view->setKeySpecialCallback(keySpecialCallback);
+	if (res)
+	{
+		view.setDisplayCallback(displayCallback);
+		view.setReshapeCallback(reshapeCallback);
+		view.setMouseCallback(mouseCallback);
+		view.setMouseWheelCallback(mouseWheelCallback);
+		view.setMotionCallback(motionCallback);
+		view.setKeyboardCallback(keyboardCallback);
+		view.setKeySpecialCallback(keySpecialCallback);
 
-	view->finishInit();
+		view.finishInit();
+	}
+
+	return res;
 }
 
 void OpenGLController::display()
 {
-	view->display(&model->getModelMatrix(), model->getData());
+	view.display(model.getModelMatrix(), model.getData());
 }
 
 void OpenGLController::reshape(int width, int height)
 {
-	view->reshape(width, height);
+	view.reshape(width, height);
 }
 
 void OpenGLController::mouse(int button, int state, int x, int y)
@@ -130,14 +131,14 @@ void OpenGLController::mouseWheel(int wheel, int direction, int x, int y)
 	{
 	case 1:
 		sx = sy = sz *= FACTOR;
-		model->updateScale(sx, sy, sz);
-		view->postRedisplay();
+		model.updateScale(sx, sy, sz);
+		view.postRedisplay();
 		break;
 
 	case -1:
 		sx = sy = sz /= FACTOR;
-		model->updateScale(sx, sy, sz);
-		view->postRedisplay();
+		model.updateScale(sx, sy, sz);
+		view.postRedisplay();
 		break;
 
 	default:
@@ -145,7 +146,7 @@ void OpenGLController::mouseWheel(int wheel, int direction, int x, int y)
 	}
 }
 
-void OpenGLController::motion(int x, int y)
+void OpenGLController::motion(int x, int y) const
 {
 	printLog("Mouse motion:  x = " + std::to_string(x) + ",   y = " + std::to_string(y));
 }
@@ -161,8 +162,8 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 		else if (LEFT_BUTTON_down) // counterclockwise
 			angleY -= ANGLE;
 		
-		model->updateRotation(angleX, angleY, angleZ);
-		view->postRedisplay();
+		model.updateRotation(angleX, angleY, angleZ);
+		view.postRedisplay();
 		break;
 
 	case 'x':
@@ -172,8 +173,8 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 		else if (LEFT_BUTTON_down) // counterclockwise
 			angleX -= ANGLE;
 		
-		model->updateRotation(angleX, angleY, angleZ);
-		view->postRedisplay();
+		model.updateRotation(angleX, angleY, angleZ);
+		view.postRedisplay();
 		break;
 
 	case 'z':
@@ -183,8 +184,8 @@ void OpenGLController::keyboard(unsigned char key, int x, int y)
 		else if (LEFT_BUTTON_down) // counterclockwise
 			angleZ -= ANGLE;
 		
-		model->updateRotation(angleX, angleY, angleZ);
-		view->postRedisplay();
+		model.updateRotation(angleX, angleY, angleZ);
+		view.postRedisplay();
 		break;
 
 	default:
@@ -198,26 +199,26 @@ void OpenGLController::keySpecial(int key, int x, int y)
 	{
 	case GLUT_KEY_LEFT:
 		dx -= STEP;
-		model->updateTranslation(dx, dy, dz);
-		view->postRedisplay();
+		model.updateTranslation(dx, dy, dz);
+		view.postRedisplay();
 		break;
 
 	case GLUT_KEY_DOWN:
 		dy -= STEP;
-		model->updateTranslation(dx, dy, dz);
-		view->postRedisplay();
+		model.updateTranslation(dx, dy, dz);
+		view.postRedisplay();
 		break;
 
 	case GLUT_KEY_RIGHT:
 		dx += STEP;
-		model->updateTranslation(dx, dy, dz);
-		view->postRedisplay();
+		model.updateTranslation(dx, dy, dz);
+		view.postRedisplay();
 		break;
 
 	case GLUT_KEY_UP:
 		dy += STEP;
-		model->updateTranslation(dx, dy, dz);
-		view->postRedisplay();
+		model.updateTranslation(dx, dy, dz);
+		view.postRedisplay();
 		break;
 
 	default:
@@ -225,7 +226,7 @@ void OpenGLController::keySpecial(int key, int x, int y)
 	}
 }
 
-void OpenGLController::printLog(const std::string &log)
+void OpenGLController::printLog(const std::string &log) const
 {
 	if (!log.empty())
 		std::cout << log << std::endl;

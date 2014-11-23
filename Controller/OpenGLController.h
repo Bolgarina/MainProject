@@ -1,7 +1,6 @@
 #pragma once
 
 #include "./IController.h"
-#include "./ShapesReader.h"
 
 #include <string>
 
@@ -11,9 +10,9 @@ class View;
 class OpenGLController: public IController
 {
 public:
-	OpenGLController(Model *i_model, View* i_view);
+	OpenGLController(Model &i_model, View &i_view);
 
-	void init(int &i_argc, char **i_argv);
+	bool init(int &i_argc, char **i_argv);
 
 	void display();
 	void reshape(int width, int height);
@@ -21,15 +20,16 @@ public:
 	// Interaction
 	void mouse(int button, int state, int x, int y);
 	void mouseWheel(int wheel, int direction, int x, int y);
-	void motion(int x, int y);
+	void motion(int x, int y) const;
 	void keyboard(unsigned char key, int x, int y);
 	void keySpecial(int key, int x, int y);
 
-	void printLog(const std::string &log);
+private:
+	void printLog(const std::string &log) const;
 
 private:
-	Model *model;
-	View *view;
+	Model &model;
+	View &view;
 
 	bool LEFT_BUTTON_down, RIGHT_BUTTON_down;
 

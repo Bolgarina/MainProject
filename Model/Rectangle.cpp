@@ -10,13 +10,13 @@ namespace Geometry
 		vertices.push_back(Point(1.0f, 1.0f, 0.0f));
 	}
 
-	Rectangle::Rectangle(Point i_left_bottom_vertex, Point i_right_top_vertex, Color i_color) :
+	Rectangle::Rectangle(const Point i_left_bottom_vertex, const Point i_right_top_vertex, const Color i_color) :
 		color(i_color)
 	{
 		if ((i_left_bottom_vertex.x == i_right_top_vertex.x && i_left_bottom_vertex.y == i_right_top_vertex.y) || 
 			(i_left_bottom_vertex.x == i_right_top_vertex.x && i_left_bottom_vertex.z == i_right_top_vertex.z) ||
 			(i_left_bottom_vertex.y == i_right_top_vertex.y && i_left_bottom_vertex.z == i_right_top_vertex.z))
-			throw std::logic_error("Degenerate rectangle (line/point).");
+			throw std::invalid_argument("Degenerate rectangle (line/point).");
 
 		vertices.reserve(2);
 		vertices.push_back(i_left_bottom_vertex);

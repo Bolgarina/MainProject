@@ -23,22 +23,22 @@ void View::postRedisplay()
 	glutPostRedisplay();
 }
 
-void View::reshape(int width, int height)
+void View::reshape(int width, int height) const
 {
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 }
 
-void View::display(const Math::Matrix4f *const i_transformationMatrix, const std::list<std::shared_ptr<Geometry::IShape>>& i_list)
+void View::display(const Math::Matrix4f &i_transformationMatrix, const std::list<std::shared_ptr<Geometry::IShape>>& i_list)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (auto it = i_list.begin(); it != i_list.end(); it++)
-		render(it->get(), i_transformationMatrix);
+		render(*it->get(), i_transformationMatrix);
 
 	glutSwapBuffers();
 }
 
-void View::startInit(int &i_argc, char **i_argv)
+bool View::startInit(int &i_argc, char **i_argv)
 {
 	// Window configuration
 	glutInit(&i_argc, i_argv);
@@ -55,19 +55,26 @@ void View::startInit(int &i_argc, char **i_argv)
 	if (glewInit())
 	{
 		std::cerr << "Unable to initialize GLEW ...exiting" << std::endl;
-		exit(EXIT_FAILURE);
+		return false;
 	};
 
 	glEnable(GL_DEPTH_TEST);
+	glClearColor(0.0, 0.0, 0.0, 0.0);
 
 	// Shader program initialization
-	sh_program.init("shader.vert", "shader.frag");
+	bool res = sh_program.init("shader.vert", "shader.frag");
 
-	a_coord = sh_program.getAttributeLocation("coord");
-	u_color = sh_program.getUniformLocation("color");
-	u_transformationMatrix = sh_program.getUniformLocation("transformationMatrix");
+	if (res)
+	{
+		a_coord = sh_program.getAttributeLocation("coord");
+		u_color = sh_program.getUniformLocation("color");
+		u_transformationMatrix = sh_program.getUniformLocation("transformationMatrix");
 
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+		if (a_coord == -1 || u_color == -1 || u_transformationMatrix == -1)
+			return false;
+	}
+
+	return res;
 }
 
 void View::finishInit()
@@ -110,15 +117,12 @@ void View::setKeySpecialCallback(void(*callback)(int, int, int))
 	glutSpecialFunc(callback);
 }
 
-void View::render(Geometry::IShape *i_shape, const Math::Matrix4f *const p_transformationMatrix)
+void View::render(const Geometry::IShape &i_shape, const Math::Matrix4f &p_transformationMatrix)
 {
-	if (!i_shape)
-		throw std::runtime_error("Exceptional case.");
-
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-	const std::vector<Geometry::Point> rectangle = i_shape->getVertices();
+	const std::vector<Geometry::Point> rectangle = i_shape.getVertices();
 
 	size_t size = rectangle.size();
 	if (size == 6 || size == 3)
@@ -126,9 +130,9 @@ void View::render(Geometry::IShape *i_shape, const Math::Matrix4f *const p_trans
 		glBufferData(GL_ARRAY_BUFFER, sizeof(rectangle[0]) * rectangle.size(), &rectangle.front(), GL_STATIC_DRAW);
 
 		sh_program.bind();
-		sh_program.setUniformMatrix(u_transformationMatrix, *p_transformationMatrix);
+		sh_program.setUniformMatrix(u_transformationMatrix, p_transformationMatrix);
 
-		Math::Vector4f color = i_shape->getColor();
+		Math::Vector4f color = i_shape.getColor();
 		sh_program.setUniformVector(u_color, color);
 
 		glEnableVertexAttribArray(a_coord); // lets to use a_coord

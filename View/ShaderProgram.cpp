@@ -19,10 +19,13 @@ ShaderProgram::~ShaderProgram()
 	glDeleteProgram(program_id);
 }
 
-void ShaderProgram::init(const std::string &i_vsFile, const std::string &i_fsFile)
+bool ShaderProgram::init(const std::string &i_vsFile, const std::string &i_fsFile)
 {
-	shader_vp.init(GL_VERTEX_SHADER, i_vsFile);
-	shader_fp.init(GL_FRAGMENT_SHADER, i_fsFile);
+	bool res = shader_vp.init(GL_VERTEX_SHADER, i_vsFile);
+	res &= shader_fp.init(GL_FRAGMENT_SHADER, i_fsFile);
+
+	if (!res)
+		return false;
 
 	shader_vp.compile();
 	shader_fp.compile();
@@ -39,9 +42,11 @@ void ShaderProgram::init(const std::string &i_vsFile, const std::string &i_fsFil
 		if (!validateProgram())
 		{
 			std::cerr << "The shader link phase completed unsuccessfully." << std::endl;
-			exit(EXIT_FAILURE);
+			return false;
 		}
 	}
+
+	return true;
 }
 
 void ShaderProgram::bind() const
@@ -74,7 +79,6 @@ bool ShaderProgram::validateProgram() const
 		std::vector<GLchar> infoLog(maxLength);
 		glGetProgramInfoLog(program_id, maxLength, &maxLength, &infoLog[0]);
 
-		// glDeleteProgram(program);
 		return false;
 	}
 	
@@ -87,10 +91,7 @@ GLint ShaderProgram::getAttributeLocation(const std::string &i_attribute) const
 	GLint attribute_location = glGetAttribLocation(program_id, i_attribute.c_str());
 
 	if (attribute_location == -1)
-	{
 		std::cerr << "Could not bind attribute " << i_attribute << std::endl;
-		exit(EXIT_FAILURE);
-	}
 
 	return attribute_location;
 }
@@ -100,10 +101,7 @@ GLint ShaderProgram::getUniformLocation(const std::string &i_uniform) const
 	GLint uniform_location = glGetUniformLocation(program_id, i_uniform.c_str());
 
 	if (uniform_location == -1)
-	{
 		std::cerr << "Could not bind uniform " << i_uniform << std::endl;
-		exit(EXIT_FAILURE);
-	}
 
 	return uniform_location;
 }

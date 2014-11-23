@@ -12,9 +12,9 @@ public:
 	const ShapesReader::ShList& getData() const;
 	const Math::Matrix4f getModelMatrix();
 
-	void updateTranslation(const float &dx, const float &dy, const float &dz);
-	void updateScale(const float &sx, const float &sy, const float &sz);
-	void updateRotation(const float &angleX, const float &angleY, const float &angleZ);
+	void updateTranslation(const float dx, const float dy, const float dz);
+	void updateScale(const float sx, const float sy, const float sz);
+	void updateRotation(const float angleX, const float angleY, const float angleZ);
 
 private:
 	Math::Matrix4f TranslationMatrix;

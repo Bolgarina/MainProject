@@ -8,7 +8,7 @@
 #include <vector>
 #include <sstream>
 
-ShapesReader::ShapesReader(const std::string i_name) : name(i_name)
+ShapesReader::ShapesReader(const std::string &i_name) : name(i_name)
 {
 }
 

@@ -15,17 +15,23 @@ Shader::~Shader()
 	// shader is tagged for deletion and deleted if it is no longer being used by any shader program
 }
 
-void Shader::init(const GLenum &i_type, const std::string &i_fileName)
+bool Shader::init(const GLenum &i_type, const std::string &i_fileName)
 {
 	shader_id = glCreateShader(i_type); // This function returns 0 if an error occurs creating the shader object
 										// GL_INVALID_ENUM is generated if shaderType is not an accepted value.
 
 	unsigned int glErr = glGetError();
 	if (glErr == GL_INVALID_ENUM)
+	{
 		std::cout << "Shader type is incorrect." << std::endl;
+		return false;
+	}
 	else
 	{
-		std::string shader_content = loadFromFile(i_fileName);
+		std::string shader_content;
+		if (!loadFromFile(i_fileName, shader_content))
+			return false;
+
 		const char* shader_source = shader_content.c_str();
 
 		glShaderSource(shader_id, 1, &shader_source, 0);
@@ -34,8 +40,13 @@ void Shader::init(const GLenum &i_type, const std::string &i_fileName)
 		// GL_INVALID_OPERATION is generated if shader_id is not a shader object.
 		unsigned int glErr = glGetError();
 		if ((glErr == GL_INVALID_VALUE) || (glErr == GL_INVALID_OPERATION))
+		{
 			std::cout << "Error occurred when OpenGL was copying the shader source code (glShaderSource)" << std::endl;
+			return false;
+		}
 	}
+
+	return true;
 }
 
 const GLuint &Shader::id() const
@@ -60,7 +71,6 @@ bool Shader::validateShader() const
 		std::vector<char> errorLog(maxLength);
 		glGetShaderInfoLog(shader_id, maxLength, &maxLength, &errorLog[0]);
 
-		// glDeleteShader(shader_id);
 		return false;
 	}
 
@@ -68,14 +78,14 @@ bool Shader::validateShader() const
 	return true; 
 }
 
-std::string Shader::loadFromFile(const std::string &i_fileName) const
+bool Shader::loadFromFile(const std::string &i_fileName, std::string &o_content) const
 {
 	std::ifstream file(i_fileName.c_str());
 
 	if (!file.is_open())
 	{
 		std::cerr << "Failed to open file: " << i_fileName << std::endl;
-		exit(-1);
+		return false;
 	}
 
 	std::stringstream stream;
@@ -83,5 +93,6 @@ std::string Shader::loadFromFile(const std::string &i_fileName) const
 
 	file.close();
 
-	return stream.str();
+	o_content = stream.str();
+	return true;
 }

@@ -12,11 +12,11 @@ namespace Geometry
 		vertices.push_back(Point(0.0f, 1.0f, 0.0f));
 	}
 
-	Triangle::Triangle(Point i_vertex1, Point i_vertex2, Point i_vertex3, Color i_color) :
+	Triangle::Triangle(const Point i_vertex1, const Point i_vertex2, const Point i_vertex3, const Color i_color) :
 		color(i_color)
 	{
 		if (i_vertex1 == i_vertex2 || i_vertex1 == i_vertex3 || i_vertex2 == i_vertex3)
-			throw std::logic_error("Vertices should be different.");
+			throw std::invalid_argument("Vertices should be different.");
 
 		vertices.reserve(3);
 
@@ -68,7 +68,7 @@ namespace Geometry
 		return Math::Vector4f(color.r, color.g, color.b, color.alpha);
 	}
 
-	void Triangle::setVertex(size_t i_index, Point i_pt)
+	void Triangle::setVertex(const size_t i_index, const Point i_pt)
 	{
 		if ((i_index > 2) || (i_index < 0))
 			throw std::invalid_argument("Invalid argument (out of range).");

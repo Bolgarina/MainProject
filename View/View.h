@@ -22,9 +22,9 @@ public:
 	~View();
 
 	void postRedisplay();
-	void reshape(int width, int height);
-	void display(const Math::Matrix4f *const i_transformationMatrix, const std::list<std::shared_ptr<Geometry::IShape>>& i_list);
-	void startInit(int &i_argc, char **i_argv);
+	void reshape(int width, int height) const;
+	void display(const Math::Matrix4f &i_transformationMatrix, const std::list<std::shared_ptr<Geometry::IShape>>& i_list);
+	bool startInit(int &i_argc, char **i_argv);
 	void finishInit();
 
 	void setDisplayCallback(void(*callback)(void));
@@ -36,7 +36,7 @@ public:
 	void setKeySpecialCallback(void(*callback)(int, int, int));
 
 private:
-	void render(Geometry::IShape *i_shape, const Math::Matrix4f *const p_transformationMatrix);
+	void render(const Geometry::IShape &i_shape, const Math::Matrix4f &p_transformationMatrix);
 
 	ShaderProgram sh_program;
 	GLuint VBO;
