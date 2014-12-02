@@ -1,26 +1,29 @@
 #include "./Matrix4f.h"
 
 #include <cmath>
+#include <stdexcept>
 
 namespace Math
 {
-	Matrix4f::Matrix4f() : matrix(SIZE, Vector4f())
+	Matrix4f::Matrix4f()
 	{
+		for (size_t i = 0; i < SIZE; i++)
+			this->matrix[i] = Vector4f();
 	}
 
 	Matrix4f::Matrix4f(const Vector4f &vect1, const Vector4f &vect2, const Vector4f &vect3, const Vector4f &vect4)
 	{
-		matrix.reserve(SIZE);
-		matrix.push_back(vect1);
-		matrix.push_back(vect2);
-		matrix.push_back(vect3);
-		matrix.push_back(vect4);
+		matrix[0] = vect1;
+		matrix[1] = vect2;
+		matrix[2] = vect3;
+		matrix[3] = vect4;
 	}
 
 	// Copy Constructor                                                                                                                                                           
 	Matrix4f::Matrix4f(const Matrix4f& rhs)
 	{
-		matrix = rhs.matrix;
+		for (size_t i = 0; i < SIZE; i++)
+			this->matrix[i] = rhs[i];
 	}
                                                                                                                                                        
 	Matrix4f::~Matrix4f()
@@ -33,7 +36,6 @@ namespace Math
 		if (&rhs == this)
 			return *this;
 
-		matrix.resize(SIZE);
 		for (size_t i = 0; i < SIZE; i++)
 			matrix[i] = rhs[i];
 
@@ -148,17 +150,16 @@ namespace Math
 		return this->matrix[0] == rhs[0] && this->matrix[1] == rhs[1] && this->matrix[2] == rhs[2] && this->matrix[3] == rhs[3];
 	}
 
-	std::vector<float> Matrix4f::get() const
+	void Matrix4f::get(float o_values[SIZE*SIZE]) const
 	{
-		std::vector<float> vec;
-		vec.reserve(SIZE * SIZE);
 		for (size_t i = 0; i < SIZE; i++)
 		{
-			std::vector<float> row = matrix[i].get();
-			vec.insert(vec.end(), row.begin(), row.end());
+			float vect[SIZE];
+			matrix[i].get(vect);
+			
+			for (size_t j = 0; j < SIZE; j++)
+				o_values[j + i * SIZE] = vect[j];
 		}
-
-		return vec;
 	}
 
 	// Access the individual elements                                                                                                                                             

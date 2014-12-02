@@ -2,25 +2,28 @@
 
 #include <cmath>
 #include <cfloat>
+#include <stdexcept>
 
 namespace Math
 {
-	Vector4f::Vector4f() : vect(SIZE, 0.0f)
+	Vector4f::Vector4f()
 	{
+		for (size_t i = 0; i < SIZE; i++)
+			this->vect[i] = 0.0f;
 	}
 
 	Vector4f::Vector4f(const float arg1, const float arg2, const float arg3, const float arg4)
 	{
-		vect.reserve(SIZE);
-		vect.push_back(arg1);
-		vect.push_back(arg2);
-		vect.push_back(arg3);
-		vect.push_back(arg4);
+		vect[0] = arg1;
+		vect[1] = arg2;
+		vect[2] = arg3;
+		vect[3] = arg4;
 	}
 
 	Vector4f::Vector4f(const Vector4f &rhs)
 	{
-		vect = rhs.vect;
+		for (size_t i = 0; i < SIZE; i++)
+			this->vect[i] = rhs[i];
 	}
 
 	Vector4f::~Vector4f()
@@ -32,9 +35,8 @@ namespace Math
 		if (&rhs == this)
 			return *this;
 
-		vect.resize(SIZE);
-		for (size_t i = 0; i < vect.size(); i++)
-			vect[i] = rhs[i];
+		for (size_t i = 0; i < SIZE; i++)
+			this->vect[i] = rhs[i];
 
 		return *this;
 	}
@@ -103,9 +105,10 @@ namespace Math
 			(std::abs(vect[3] - rhs[3]) <= FLT_EPSILON);
 	}
 
-	const std::vector<float> &Vector4f::get() const
+	void Vector4f::get(float o_values[SIZE]) const
 	{
-		return vect;
+		for (size_t i = 0; i < SIZE; i++)
+			o_values[i] = this->vect[i];
 	}
 
 	const size_t& Vector4f::size() const

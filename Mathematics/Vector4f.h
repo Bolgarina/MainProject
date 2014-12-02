@@ -1,7 +1,6 @@
 #pragma once
 
 #include "./Matrix.h"
-#include <vector>
 
 namespace Math
 {
@@ -28,7 +27,7 @@ namespace Math
 		// Bool operations
 		const bool operator==(const Vector4f &rhs);
 
-		const std::vector<float> &get() const;
+		void get(float o_values[SIZE]) const;
 		const size_t& size() const;
 
 		// Access the individual elements                                                                                                                                                                                               
@@ -36,6 +35,6 @@ namespace Math
 		const float& operator[](const size_t &index) const;
 
 	private:
-		std::vector<float> vect;
+		float vect[SIZE];
 	};
 }

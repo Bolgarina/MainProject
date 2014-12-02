@@ -3,8 +3,6 @@
 #include "./Matrix.h"
 #include "./Vector4f.h"
 
-#include <vector>
-
 namespace Math
 {
 	class Matrix4f
@@ -37,7 +35,7 @@ namespace Math
 		// bool operations
 		const bool operator==(const Matrix4f &rhs);
 
-		std::vector<float> get() const;
+		void get(float o_values[SIZE*SIZE]) const;
 
 		// Access the individual elements                                                                                                                                                                                               
 		Vector4f& operator[](const size_t &index);
@@ -55,7 +53,7 @@ namespace Math
 		static Matrix4f createOrtho(const float left, const float right, const float bottom, const float top, const float near, const float far);
 		static Matrix4f createPerspective(const float left, const float right, const float bottom, const float top, const float near, const float far);
 
-	protected:
-		std::vector<Vector4f> matrix;
+	private:
+		Vector4f matrix[SIZE];
 	};
 }
